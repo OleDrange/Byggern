@@ -39,10 +39,13 @@ SUBDIRS :=
 C_SRCS +=  \
 ../ADC_driver.c \
 ../Byggern.c \
+../CAN.c \
+../CAN_controller_driver.c \
 ../Joystick_driver.c \
 ../oled_driver.c \
 ../oled_menu.c \
 ../slider.c \
+../SPI_driver.c \
 ../SRAM_driver.c
 
 
@@ -55,37 +58,49 @@ ASM_SRCS +=
 OBJS +=  \
 ADC_driver.o \
 Byggern.o \
+CAN.o \
+CAN_controller_driver.o \
 Joystick_driver.o \
 oled_driver.o \
 oled_menu.o \
 slider.o \
+SPI_driver.o \
 SRAM_driver.o
 
 OBJS_AS_ARGS +=  \
 ADC_driver.o \
 Byggern.o \
+CAN.o \
+CAN_controller_driver.o \
 Joystick_driver.o \
 oled_driver.o \
 oled_menu.o \
 slider.o \
+SPI_driver.o \
 SRAM_driver.o
 
 C_DEPS +=  \
 ADC_driver.d \
 Byggern.d \
+CAN.d \
+CAN_controller_driver.d \
 Joystick_driver.d \
 oled_driver.d \
 oled_menu.d \
 slider.d \
+SPI_driver.d \
 SRAM_driver.d
 
 C_DEPS_AS_ARGS +=  \
 ADC_driver.d \
 Byggern.d \
+CAN.d \
+CAN_controller_driver.d \
 Joystick_driver.d \
 oled_driver.d \
 oled_menu.d \
 slider.d \
+SPI_driver.d \
 SRAM_driver.d
 
 OUTPUT_FILE_PATH +=Byggern.elf
@@ -102,6 +117,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

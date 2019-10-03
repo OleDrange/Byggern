@@ -16,6 +16,8 @@
 #include "slider.h"
 #include "oled_driver.h"
 #include "oled_menu.h"
+#include "CAN_controller_driver.h"
+#include "CAN.h"
 int main( )
 {
 	My_serial_Init ( MYUBRR );
@@ -28,6 +30,8 @@ int main( )
 	SLI_pos_t sliderposition;
 	oled_init();
 	menu* mymenu = oled_menu_init();
+	
+	can_init(MODE_LOOPBACK);
 	
 	while(1){
 		
@@ -55,22 +59,50 @@ int main( )
 		//oled_pos(3,0);
 		//oled_printf("TESTING3");
 		//
-		DDRB = 0xFF;
+		//DDRB = 0xFF;
 		//oled_init();
 		//oled_inv_printf("TESTING");
 		//_delay_ms(3000);
 		
-		uint16_t test = PORTB;
-		switch_font(FONT_4X6);
+		//uint16_t test = PORTB;
+		//switch_font(FONT_4X6);
 		JoystickDir dir = oled_menu_select();
 		//oled_menu_print(mymenu);
-		printf("%d  \r \n",test);
+		
+			
 
-		
-		//printf("Left button = %i ", leftbutton);
-		//printf("Right button = %i \r \n", rightbutton);
-		
-		 
+			can_message test;
+			test.id		= 1337;
+			test.data[0]	= 'H';
+			test.data[1]	= 'e';
+			test.data[2]	= 'l';
+			test.data[3]	= 'l';
+			test.data[4]	= 'o';
+			test.length	= 5;
+
+			can_message test2;
+			test2.id		= 1338;
+			test2.data[0]	= 'W';
+			test2.data[1]	= 'o';
+			test2.data[2]	= 'r';
+			test2.data[3]	= 'l';
+			test2.data[4]	= 'd';
+			test2.length	= 5;
+
+
+			can_message_send(&test);
+			can_message_send(&test2);
+			
+			//printf(" %c ",test.data[0]);
+
+			if ( can_interrupt()){
+				test = can_handle_messages();
+				
+				for(int i = 0; i < 8 ; i++){
+					printf(" %c ",test.data[i]);
+				}
+				printf("\r \n");
+			}
 		
 		_delay_ms(100);
 		

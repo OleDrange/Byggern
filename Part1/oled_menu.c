@@ -93,7 +93,7 @@ JoystickDir oled_menu_select(void){
 	}
 	if(direction == RIGHT){
 		if(current_menu->first_child != NULL){
-			current_menu = current_menu->first_child;
+				current_menu = current_menu->first_child;
 		}
 		for(int i =0; i < current_line;i++){
 			current_menu = current_menu->right_sibling;

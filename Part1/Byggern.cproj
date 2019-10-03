@@ -131,6 +131,15 @@
     <Compile Include="Byggern.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="CAN.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN_controller_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DriverATmega162.h">
       <SubType>compile</SubType>
     </Compile>
@@ -149,6 +158,12 @@
     <Compile Include="LatchTest.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="CAN_controller_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCP2515.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="oled_driver.c">
       <SubType>compile</SubType>
     </Compile>
@@ -165,6 +180,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="slider.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SRAMTestProgram.h">

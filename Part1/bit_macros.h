@@ -17,3 +17,23 @@
 #define toggle_bit(reg, bit) (reg ^= (1 << bit))
 
 #endif /* BIT_MACROS_H_ */
+
+/*
+	set_bit(PORTB, PB4);
+
+	PORTB = 0b 1001 1001
+
+	PB4 = 1 / 0 eller 0001 0000
+
+	set_bit(0b 1001 1001, 1)
+
+	PORTB = PORTB | 0001 0000 << 16
+	PORTB = PORTB | 0000 0000 
+	PORTB = 1001 1001  ???
+
+	PORTB = PORTB | 0000 0001 << 1
+	PORTB = PORTB | 0000 0010
+	PORTB = 1001 1011  ???
+
+
+ */
