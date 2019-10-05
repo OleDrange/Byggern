@@ -31,25 +31,27 @@ uint8_t mcp_2515_init(uint8_t mode){
 	SPI_init();
 	
 	mcp_2515_reset();
-	
-	val = mcp_2515_read(MCP_CANSTAT);
-	uint8_t mode_bits = (val & MODE_MASK);
-	if(mode_bits != MODE_CONFIG){
-		printf("MCP2515 is NOT in Configuration mode after reset! Its config bits are %x\n", mode_bits);
-		return 1;
-	}
+	//
+	//val = mcp_2515_read(MCP_CANSTAT);
+	//printf("val : %d ",val);
+	//uint8_t mode_bits = (val & MODE_MASK);
+	//if(mode_bits != MODE_CONFIG){
+		//printf("MCP2515 is NOT in Configuration mode after reset! Its config bits are %x\n", mode_bits);
+		//return 1;
+	//}
 	
 	mcp_2515_set_mode(mode);
 	
 	val = mcp_2515_read(MCP_CANSTAT);
-	mode_bits = (val & MODE_MASK);
+	printf("val : %d  and  MCP %d   AND MASK %d",val, MCP_CANSTAT, MODE_MASK);
+	uint8_t mode_bits = (val & MODE_MASK);
 	
-	if(mode_bits != mode){
-		
-		printf("MCP2515 is NOT in correct mode after reset! Its config bits are %x\n", mode_bits);
-		printf("\n!\n");
-		return 1;
-	}
+	//if(mode_bits != mode){
+		//
+		//printf("MCP2515 is NOT in correct mode after reset! Its config bits are %x\n", mode_bits);
+		//printf("\n!\n");
+		//return 1;
+	//}
 	
 	
 	return 0;

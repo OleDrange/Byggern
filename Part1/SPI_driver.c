@@ -16,7 +16,7 @@ void SPI_init(){
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
 	
 	/* Set SS-pin high */
-	set_bit(PORTB, PB4);
+	//set_bit(PORTB, PB4);
 	
 }
 
