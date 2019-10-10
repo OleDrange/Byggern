@@ -1,9 +1,11 @@
+
 /*
  * CAN_controller_driver.c
  *
- * Created: 03.10.2019 17:09:18
+ * Created: 10.10.2019 15:34:35
  *  Author: oledr
  */ 
+
 
 #include "CAN_controller_driver.h"
 #include "bit_macros.h"
@@ -13,12 +15,12 @@
 
 void mcp_activate_slave(){
 	/* Activate Slave Select */
-	clear_bit(PORTB, PB4);
+	clear_bit(PORTB, PB7);
 }
 
 void mcp_deactivate_slave(){
 	/* Deactivate Slave Select */
-	set_bit(PORTB, PB4);
+	set_bit(PORTB, PB7);
 }
 
 void mcp_2515_set_mode(uint8_t mode){

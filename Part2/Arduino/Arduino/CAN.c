@@ -1,13 +1,14 @@
 /*
  * CAN.c
  *
- * Created: 03.10.2019 17:55:38
+ * Created: 10.10.2019 15:34:56
  *  Author: oledr
  */ 
 
+
 #include "CAN.h"
 #include "bit_macros.h"
-#include "joystick_driver.h"
+//#include "joystick_driver.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -30,10 +31,10 @@ void can_init(uint8_t mode){
 	// Disable global interrupts
 	cli();
 	// Interrupt on falling edge PD2
-	set_bit(MCUCR, ISC01);
-	clear_bit(MCUCR, ISC00);
+	set_bit(EICRA, ISC21);
+	clear_bit(EICRA, ISC20);
 	// Enable interrupt on PD2
-	set_bit(GICR,INT0);
+	set_bit(EIMSK,INT2);
 	// Enable global interrupts
 	sei();
 	 

@@ -31,45 +31,32 @@ int main( )
 	oled_init();
 	menu* mymenu = oled_menu_init();
 	
-	can_init(MODE_LOOPBACK);
+	can_init(MODE_NORMAL);
 	
+	
+	uint8_t v[2] = {0};
+	printf("Rx0 %d  Rx1  %d \n\r",v[0],v[1]);
 	while(1){
 		
-		//position = joystickPos();
-		//position = JoystickDirection();
-		//sliderposition = slider_position();
-		////int leftbutton = slider_left_button();
-		////int rightbutton = slider_right_button();
+		//SPI_init();
 		//
-		//printf("Position of the joystick: \r \n"); 
-		//printf("Pos x = %d  ",position.xPos);
-		//printf("Pos y = %d  ",position.yPos);
-		//printf("Direction = %i \r \n",position.Dir);
-		//
-		//printf("Position of the sliders: \r \n");
-		//printf("Left slider position = %d ", sliderposition.L);
-		//printf("Right slider position = %d \r \n\n", sliderposition.R);
-
-		//oled_reset();
-		//oled_printf("TESTING");
-		//oled_pos(1,0);
-		//oled_printf("TESTING1");
-		//oled_pos(2,0);
-		//oled_printf("TESTING2");
-		//oled_pos(3,0);
-		//oled_printf("TESTING3");
-		//
-		//DDRB = 0xFF;
-		//oled_init();
-		//oled_inv_printf("TESTING");
-		//_delay_ms(3000);
-		
+		//mcp_2515_reset();
+		//uint8_t val = 10;
+		//val = mcp_2515_read(MCP_CANSTAT);
+		//printf("val : %d ",val);
+		//uint8_t mode_bits = (val & MODE_MASK);
+		//mcp_2515_set_mode(MODE_LOOPBACK);
+		//_delay_ms(100);
+		//val = mcp_2515_read(MCP_CANSTAT);
+		//printf("val : %d \n \r",val);
 		//uint16_t test = PORTB;
 		//switch_font(FONT_4X6);
-		JoystickDir dir = oled_menu_select();
+		//JoystickDir dir = oled_menu_select();
 		//oled_menu_print(mymenu);
-		
+			can_message dummy;
+			can_message dummy1;
 			
+			can_message hei;
 
 			can_message test;
 			test.id		= 1337;
@@ -91,20 +78,29 @@ int main( )
 
 
 			can_message_send(&test);
-			can_message_send(&test2);
-			
-			//printf(" %c ",test.data[0]);
 
+			
+			can_message_send(&dummy1);
 			if ( can_interrupt()){
-				test = can_handle_messages();
+				hei = can_handle_messages();
 				
-				for(int i = 0; i < 8 ; i++){
-					printf(" %c ",test.data[i]);
+				for(int i = 0; i < hei.length ; i++){
+					printf(" %c ",hei.data[i]);
+				}
+				printf("\r \n");
+			}
+			can_message_send(&test2);
+			can_message_send(&dummy1);
+			if ( can_interrupt()){
+				dummy = can_handle_messages();
+				
+				for(int i = 0; i < dummy.length ; i++){
+					printf(" %c ",dummy.data[i]);
 				}
 				printf("\r \n");
 			}
 		
-		_delay_ms(100);
+		_delay_ms(1000);
 		
 		//volatile char *ext_adc = (char *) 0x1400;
 		//ext_adc[0] = 0b00000010;

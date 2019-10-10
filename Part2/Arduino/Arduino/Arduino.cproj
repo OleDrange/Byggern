@@ -4,17 +4,17 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
-    <ProjectGuid>{612d61ec-e54d-47b1-b34d-6ca5462ad9c6}</ProjectGuid>
-    <avrdevice>ATmega162</avrdevice>
+    <ProjectGuid>{cc40a495-ad27-4904-9f7a-a33b898400b1}</ProjectGuid>
+    <avrdevice>ATmega2560</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>Byggern</AssemblyName>
-    <Name>Byggern</Name>
-    <RootNamespace>Byggern</RootNamespace>
+    <AssemblyName>Arduino</AssemblyName>
+    <Name>Arduino</Name>
+    <RootNamespace>Arduino</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -42,17 +42,7 @@
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
         <InterfaceProperties>
-          <JtagEnableExtResetOnStartSession>true</JtagEnableExtResetOnStartSession>
-          <JtagInChain>false</JtagInChain>
-          <JtagDevicesBefore>0</JtagDevicesBefore>
-          <JtagDevicesAfter>0</JtagDevicesAfter>
-          <JtagInstrBitsBefore>0</JtagInstrBitsBefore>
-          <JtagInstrBitsAfter>0</JtagInstrBitsAfter>
-          <JtagSelectedDeviceIndexInChain>
-          </JtagSelectedDeviceIndexInChain>
-          <JtagDbgClock>200000</JtagDbgClock>
-          <JtagDaisyChainDevices>
-          </JtagDaisyChainDevices>
+          <JtagDbgClock>7500000</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
@@ -65,6 +55,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGcc>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -92,6 +83,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -119,16 +111,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ADC_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="ADC_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="bit_macros.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Byggern.c">
+    <Compile Include="Arduino.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="CAN.c">
@@ -140,46 +123,19 @@
     <Compile Include="CAN_controller_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DriverATmega162.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="fonts.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="GALselect.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Joystick_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Joystick_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LatchTest.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="CAN_controller_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCP2515.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="oled_driver.c">
+    <Compile Include="UART_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="oled_driver.h">
+    <Compile Include="UART_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="oled_menu.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="oled_menu.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="slider.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="slider.h">
+    <Compile Include="bit_macros.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SPI_driver.c">
@@ -188,18 +144,6 @@
     <Compile Include="SPI_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="SRAMTestProgram.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Node1" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
