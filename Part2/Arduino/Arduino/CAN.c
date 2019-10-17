@@ -17,9 +17,10 @@
 volatile int flag = 0;
 
 
-ISR(INT0_vect){
-	flag = 1;
-}
+ISR(INT2_vect){ 
+	flag = 1; 
+	//printf("\r\n INTERUPT \r \n");
+} 
 
 void can_init(uint8_t mode){
 
@@ -59,6 +60,7 @@ can_message can_handle_messages(){
 		can_message_receive(0, &message1);
 		mcp_2515_write(MCP_CANINTF,0);
 		mcp_2515_bit_modify(MCP_CANINTF, 1, 0);
+		//mcp_2515_bit_modify(MCP_CANINTF, 1, 0);
 		can_int_vect(v);
 		if (!v[1]){
 			flag = 0;
@@ -71,6 +73,7 @@ can_message can_handle_messages(){
 	if (v[1]){
 		can_message_receive(1, &message2);
 		mcp_2515_write(MCP_CANINTF,0);
+		//mcp_2515_bit_modify(MCP_CANINTF, 2, 0);
 		mcp_2515_bit_modify(MCP_CANINTF, 2, 0);
 		can_int_vect(v);
 		if (!v[0]){
@@ -124,6 +127,7 @@ int can_transmit_complete(int buffer_number){
 	if(interrupt_bits == (MCP_TX0IF + buffer_number*2)){
 			return 0;
 	}
+	printf("\r\nMELDING SENDT\r\n");
 	return 1;
 }
 

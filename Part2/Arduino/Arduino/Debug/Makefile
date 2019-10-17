@@ -40,6 +40,7 @@ C_SRCS +=  \
 ../Arduino.c \
 ../CAN.c \
 ../CAN_controller_driver.c \
+../Joystick_driver.c \
 ../UART_driver.c \
 ../SPI_driver.c
 
@@ -54,6 +55,7 @@ OBJS +=  \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+Joystick_driver.o \
 UART_driver.o \
 SPI_driver.o
 
@@ -61,6 +63,7 @@ OBJS_AS_ARGS +=  \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+Joystick_driver.o \
 UART_driver.o \
 SPI_driver.o
 
@@ -68,6 +71,7 @@ C_DEPS +=  \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+Joystick_driver.d \
 UART_driver.d \
 SPI_driver.d
 
@@ -75,6 +79,7 @@ C_DEPS_AS_ARGS +=  \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+Joystick_driver.d \
 UART_driver.d \
 SPI_driver.d
 
@@ -92,6 +97,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

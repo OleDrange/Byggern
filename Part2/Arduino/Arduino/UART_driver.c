@@ -5,13 +5,6 @@
  *  Author: oledr
  */ 
 
-/*
- * UART_driver.c
- *
- * Created: 03.09.2016 16:32:20
- *  Author: Whiskey dicks
- */
-
 // UART = Universal Asynchronous Receiver/Transmitter
 
 #include <stdio.h>

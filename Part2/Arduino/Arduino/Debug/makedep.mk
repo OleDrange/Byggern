@@ -8,6 +8,8 @@ CAN.c
 
 CAN_controller_driver.c
 
+Joystick_driver.c
+
 UART_driver.c
 
 SPI_driver.c
