@@ -37,10 +37,14 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../ADC.c \
 ../Arduino.c \
 ../CAN.c \
 ../CAN_controller_driver.c \
+../IR.c \
 ../Joystick_driver.c \
+../PWM_driver.c \
+../PWM_servo_driver.c \
 ../UART_driver.c \
 ../SPI_driver.c
 
@@ -52,34 +56,50 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+ADC.o \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+IR.o \
 Joystick_driver.o \
+PWM_driver.o \
+PWM_servo_driver.o \
 UART_driver.o \
 SPI_driver.o
 
 OBJS_AS_ARGS +=  \
+ADC.o \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+IR.o \
 Joystick_driver.o \
+PWM_driver.o \
+PWM_servo_driver.o \
 UART_driver.o \
 SPI_driver.o
 
 C_DEPS +=  \
+ADC.d \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+IR.d \
 Joystick_driver.d \
+PWM_driver.d \
+PWM_servo_driver.d \
 UART_driver.d \
 SPI_driver.d
 
 C_DEPS_AS_ARGS +=  \
+ADC.d \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+IR.d \
 Joystick_driver.d \
+PWM_driver.d \
+PWM_servo_driver.d \
 UART_driver.d \
 SPI_driver.d
 
@@ -97,6 +117,14 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
+
+
 
 
 

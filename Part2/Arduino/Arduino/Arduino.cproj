@@ -123,6 +123,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ADC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ADC.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Arduino.c">
       <SubType>compile</SubType>
     </Compile>
@@ -138,6 +144,12 @@
     <Compile Include="CAN_controller_driver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="IR.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="IR.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Joystick_driver.c">
       <SubType>compile</SubType>
     </Compile>
@@ -145,6 +157,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCP2515.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PWM_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PWM_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PWM_servo_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PWM_servo_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="UART_driver.c">

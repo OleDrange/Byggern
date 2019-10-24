@@ -25,7 +25,7 @@ int main( )
 	_delay_ms(1000);
 	
 	ADC_init();
-	SRAM_test();
+	//SRAM_test();
 	Joystick_calibrate();
 	Joystick position;
 	SLI_pos_t sliderposition;
