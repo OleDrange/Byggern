@@ -10,6 +10,8 @@ CAN.c
 
 CAN_controller_driver.c
 
+Game.c
+
 IR.c
 
 Joystick_driver.c

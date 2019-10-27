@@ -109,7 +109,7 @@ int main( )
 				////printf("\r \n");
 			////}
 		
-		_delay_ms(1000);
+		_delay_ms(500);
 		
 		//volatile char *ext_adc = (char *) 0x1400;
 		//ext_adc[0] = 0b00000010;

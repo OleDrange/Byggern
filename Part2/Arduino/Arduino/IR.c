@@ -5,7 +5,7 @@
  *  Author: juliessk
  */ 
 #include <AVR/io.h>
-
+#include <stdbool.h>
 #include "IR.h"
 #include "ADC.h"
 
@@ -13,6 +13,8 @@ uint8_t num_readings = 4;
 uint16_t readings[4];
 uint8_t read_index = 0;
 uint16_t total = 0;
+static uint8_t enemys;
+bool hasBeen0 = false;
 
 void IR_init() {
 	ADC_init();
@@ -23,6 +25,7 @@ void IR_init() {
 	
 	readings[read_index] = ADC_read();
 	total = readings[read_index];
+	enemys = 0;
 }
 
 uint16_t IR_average_filter() {
@@ -45,9 +48,19 @@ uint16_t IR_average_filter() {
 
 uint16_t IR_game_over() {
 	if (IR_average_filter() < 200) {
+		if(hasBeen0){
+			enemys = enemys + 1;
+			hasBeen0 = false;
+		}
+		
 		return 1;
 	}
 	else {
+		hasBeen0 = true;
 		return 0;
+		
 	}
+}
+uint8_t enemyScore(){
+	return enemys;
 }

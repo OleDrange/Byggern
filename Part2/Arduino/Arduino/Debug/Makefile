@@ -41,6 +41,7 @@ C_SRCS +=  \
 ../Arduino.c \
 ../CAN.c \
 ../CAN_controller_driver.c \
+../Game.c \
 ../IR.c \
 ../Joystick_driver.c \
 ../PWM_driver.c \
@@ -60,6 +61,7 @@ ADC.o \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+Game.o \
 IR.o \
 Joystick_driver.o \
 PWM_driver.o \
@@ -72,6 +74,7 @@ ADC.o \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+Game.o \
 IR.o \
 Joystick_driver.o \
 PWM_driver.o \
@@ -84,6 +87,7 @@ ADC.d \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+Game.d \
 IR.d \
 Joystick_driver.d \
 PWM_driver.d \
@@ -96,6 +100,7 @@ ADC.d \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+Game.d \
 IR.d \
 Joystick_driver.d \
 PWM_driver.d \
@@ -117,6 +122,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

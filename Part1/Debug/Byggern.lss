@@ -829,8 +829,8 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      57a:	cf 92       	push	r12
      57c:	0e 94 a9 09 	call	0x1352	; 0x1352 <printf>
      580:	2f ef       	ldi	r18, 0xFF	; 255
-     582:	8f ef       	ldi	r24, 0xFF	; 255
-     584:	9e e0       	ldi	r25, 0x0E	; 14
+     582:	8f e7       	ldi	r24, 0x7F	; 127
+     584:	97 e0       	ldi	r25, 0x07	; 7
      586:	21 50       	subi	r18, 0x01	; 1
      588:	80 40       	sbci	r24, 0x00	; 0
      58a:	90 40       	sbci	r25, 0x00	; 0

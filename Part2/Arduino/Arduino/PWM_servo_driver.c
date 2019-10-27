@@ -21,8 +21,8 @@ void servo_init(unsigned long clock_speed){
 
 void set_servo(int servo_dir){
 	
-	float min_pw = 0.001;
-	float max_pw = 0.002;
+	float min_pw = 0.0009;
+	float max_pw = 0.0021;
 	
 	float dir = (float)servo_dir;
 	

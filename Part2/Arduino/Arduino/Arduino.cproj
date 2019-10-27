@@ -144,6 +144,9 @@
     <Compile Include="CAN_controller_driver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Game.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="IR.c">
       <SubType>compile</SubType>
     </Compile>

@@ -99,21 +99,22 @@ int main(void)
 	while(1)
 	{
 		
-		if ( can_interrupt()){
+		if (can_interrupt()){
 			hei = can_handle_messages();
 			xout = map(hei.data[0],0,200,-100,100);
 			yout = map(hei.data[1],0,200,-100,100);
 			//for(int i = 0; i < hei.length ; i++){
-			printf(" Joystick x = %d, Joystick y = %d ",xout,yout);
+			//printf(" Joystick x = %d, Joystick y = %d ",xout,yout);
 			//}
 			printf("\r \n");
 			
 		}
 		set_servo(xout);
 		
-		//
-		//printf(" IR sensor = %d, ",IR_game_over());
-		//printf("\r \n");
+		//uint16_t test = ADC_read();
+		
+		printf(" Score = %d      ir = %d, ",enemyScore(), IR_game_over());
+		printf("\r \n");
 		
 		
 		_delay_ms(1000);
