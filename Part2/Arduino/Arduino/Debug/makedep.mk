@@ -10,15 +10,21 @@ CAN.c
 
 CAN_controller_driver.c
 
+DAC.c
+
 Game.c
 
 IR.c
 
 Joystick_driver.c
 
+motor_driver.c
+
 PWM_driver.c
 
 PWM_servo_driver.c
+
+TWI_Master.c
 
 UART_driver.c
 

@@ -41,11 +41,14 @@ C_SRCS +=  \
 ../Arduino.c \
 ../CAN.c \
 ../CAN_controller_driver.c \
+../DAC.c \
 ../Game.c \
 ../IR.c \
 ../Joystick_driver.c \
+../motor_driver.c \
 ../PWM_driver.c \
 ../PWM_servo_driver.c \
+../TWI_Master.c \
 ../UART_driver.c \
 ../SPI_driver.c
 
@@ -61,11 +64,14 @@ ADC.o \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+DAC.o \
 Game.o \
 IR.o \
 Joystick_driver.o \
+motor_driver.o \
 PWM_driver.o \
 PWM_servo_driver.o \
+TWI_Master.o \
 UART_driver.o \
 SPI_driver.o
 
@@ -74,11 +80,14 @@ ADC.o \
 Arduino.o \
 CAN.o \
 CAN_controller_driver.o \
+DAC.o \
 Game.o \
 IR.o \
 Joystick_driver.o \
+motor_driver.o \
 PWM_driver.o \
 PWM_servo_driver.o \
+TWI_Master.o \
 UART_driver.o \
 SPI_driver.o
 
@@ -87,11 +96,14 @@ ADC.d \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+DAC.d \
 Game.d \
 IR.d \
 Joystick_driver.d \
+motor_driver.d \
 PWM_driver.d \
 PWM_servo_driver.d \
+TWI_Master.d \
 UART_driver.d \
 SPI_driver.d
 
@@ -100,11 +112,14 @@ ADC.d \
 Arduino.d \
 CAN.d \
 CAN_controller_driver.d \
+DAC.d \
 Game.d \
 IR.d \
 Joystick_driver.d \
+motor_driver.d \
 PWM_driver.d \
 PWM_servo_driver.d \
+TWI_Master.d \
 UART_driver.d \
 SPI_driver.d
 
@@ -122,6 +137,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

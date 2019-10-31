@@ -8,6 +8,7 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include "bit_macros.h"
 #include "UART_driver.h"
 #include "SPI_driver.h"
 #include "CAN_controller_driver.h"
@@ -17,6 +18,8 @@
 #include "PWM_servo_driver.h"
 #include "ADC.h"
 #include "IR.h"
+#include "DAC.h"
+#include "motor_driver.h"
 #define F_CPU 16000000UL
 
 long map(long x, long in_min, long in_max, long out_min, long out_max);
@@ -81,6 +84,33 @@ int exersise6(void) {
 		_delay_ms(5000);
 	}
 }
+int exersise7(void) {
+	
+	can_message hei;
+	int xout;
+	int yout;
+	
+	while(1)
+	{
+		if (can_interrupt()){
+			hei = can_handle_messages();
+			xout = map(hei.data[0],0,200,-100,100);
+			yout = map(hei.data[1],0,200,-100,100);
+			//for(int i = 0; i < hei.length ; i++){
+			printf(" Joystick x = %d, Joystick y = %d ",xout,yout);
+			//}
+			printf("\r \n");
+			
+		}
+		set_servo(xout);
+		
+		//uint16_t test = ADC_read();
+		
+		printf(" Score = %d      ir = %d, ",enemyScore(), IR_game_over());
+		printf("\r \n");
+		
+	}
+}
 int main(void)
 {
 	unsigned long clockspeed = F_CPU;
@@ -93,31 +123,27 @@ int main(void)
 	servo_init(clockspeed);
 	IR_init();
 	ADC_init();
-	can_message hei;
-	int xout;
-	int yout;
+	DAC_init();
+	motor_init();
+			
+	uint16_t encoder;
 	while(1)
 	{
-		
-		if (can_interrupt()){
-			hei = can_handle_messages();
-			xout = map(hei.data[0],0,200,-100,100);
-			yout = map(hei.data[1],0,200,-100,100);
-			//for(int i = 0; i < hei.length ; i++){
-			//printf(" Joystick x = %d, Joystick y = %d ",xout,yout);
-			//}
-			printf("\r \n");
-			
-		}
-		set_servo(xout);
-		
-		//uint16_t test = ADC_read();
-		
-		printf(" Score = %d      ir = %d, ",enemyScore(), IR_game_over());
-		printf("\r \n");
-		
-		
-		_delay_ms(1000);
+
+		encoder = motor_read_rotation(0);
+		printf(" Encoder val = %d \r\n",encoder);
+		set_bit(PORTH,PH4);
+		set_bit(PORTH,PH1);
+		DAC_send(0b01000000); // slowest speed 0b01000000
+		_delay_ms(15000);
+		clear_bit(PORTH,PH4);
+		_delay_ms(500);
+		encoder = motor_read_rotation(0);
+		printf(" Encoder val = %d \r\n",encoder);
+		_delay_ms(15000);
+		set_bit(PORTH,PH4);
+		clear_bit(PORTH,PH1);
+		_delay_ms(15000);
 	}
     
 }

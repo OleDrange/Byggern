@@ -1,4 +1,4 @@
-Arduino.d Arduino.o: .././Arduino.c \
+motor_driver.d motor_driver.o: .././motor_driver.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -14,10 +14,7 @@ Arduino.d Arduino.o: .././Arduino.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\math.h \
- .././bit_macros.h .././UART_driver.h .././SPI_driver.h \
- .././CAN_controller_driver.h .././MCP2515.h .././CAN.h .././PWM_driver.h \
- .././PWM_servo_driver.h .././ADC.h .././IR.h .././DAC.h \
- .././motor_driver.h
+ .././bit_macros.h .././motor_driver.h .././ADC.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -51,24 +48,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 .././bit_macros.h:
 
-.././UART_driver.h:
-
-.././SPI_driver.h:
-
-.././CAN_controller_driver.h:
-
-.././MCP2515.h:
-
-.././CAN.h:
-
-.././PWM_driver.h:
-
-.././PWM_servo_driver.h:
+.././motor_driver.h:
 
 .././ADC.h:
-
-.././IR.h:
-
-.././DAC.h:
-
-.././motor_driver.h:
