@@ -1088,7 +1088,7 @@ END GROUP
  .debug_str     0x00000706      0x267 oled_driver.o
                                 0x42a (size before relaxing)
  .debug_str     0x0000096d       0xf3 oled_menu.o
-                                0x323 (size before relaxing)
+                                0x325 (size before relaxing)
  .debug_str     0x00000a60       0x18 SPI_driver.o
                                 0x172 (size before relaxing)
 

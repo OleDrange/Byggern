@@ -17,6 +17,6 @@ void motor_set_speed(uint8_t);
 int16_t motor_read_rotation(uint8_t);
 void motor_reset_encoder();
 void motor_calibrate();
-void motor_move(int16_t rot_diff, uint8_t power);
+void motor_move(uint8_t speed);
 
 #endif /* MOTOR_DRIVER_H_ */

@@ -20,6 +20,8 @@
 #include "IR.h"
 #include "DAC.h"
 #include "motor_driver.h"
+#include "PID.h"
+#include <avr/interrupt.h>
 #define F_CPU 16000000UL
 
 long map(long x, long in_min, long in_max, long out_min, long out_max);
@@ -125,25 +127,57 @@ int main(void)
 	ADC_init();
 	DAC_init();
 	motor_init();
-			
+	motor_calibrate();
+	PID_init();
+	_delay_ms(3000); //Time to calibrate
 	uint16_t encoder;
+	
+	volatile int xout;
+	can_message hei;
+	int yout;
 	while(1)
 	{
-
-		encoder = motor_read_rotation(0);
-		printf(" Encoder val = %d \r\n",encoder);
-		set_bit(PORTH,PH4);
-		set_bit(PORTH,PH1);
-		DAC_send(0b01000000); // slowest speed 0b01000000
-		_delay_ms(15000);
-		clear_bit(PORTH,PH4);
-		_delay_ms(500);
-		encoder = motor_read_rotation(0);
-		printf(" Encoder val = %d \r\n",encoder);
-		_delay_ms(15000);
-		set_bit(PORTH,PH4);
-		clear_bit(PORTH,PH1);
-		_delay_ms(15000);
+		
+		if (can_interrupt()){
+			
+			hei = can_handle_messages();
+			xout = map(hei.data[0],0,200,-100,100);
+			yout = map(hei.data[1],0,200,-100,100);
+			//for(int i = 0; i < hei.length ; i++){
+			//printf(" Joystick x = %d, Joystick y = %d ",xout,yout);
+			//}
+			//printf("\r \n");
+			
+		}
+		
+		xout = map(xout,-100,100,0,8000);
+		
+		if(xout >0 && xout < 8000){
+			
+			PID_setpos(xout);
+			
+		}
+		
+		_delay_ms(1000);
+		
+		//encoder = motor_read_rotation(0);
+		//printf(" Encoder val = %d \r\n",encoder);
+		//
+		//motor_move(RIGHT, 55);  
+		//_delay_ms(15000);
+		//motor_move(LEFT, 55); 
+		////set_bit(PORTH,PH4);
+		////set_bit(PORTH,PH1);
+		////DAC_send(50); // slowest speed 0b01000000
+		////_delay_ms(15000);
+		////clear_bit(PORTH,PH4);
+		////_delay_ms(500);
+		////encoder = motor_read_rotation(0);
+		////printf(" Encoder val = %d \r\n",encoder);
+		////_delay_ms(15000);
+		////set_bit(PORTH,PH4);
+		////clear_bit(PORTH,PH1);
+		//_delay_ms(15000);
 	}
     
 }

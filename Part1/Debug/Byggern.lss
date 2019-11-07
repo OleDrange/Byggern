@@ -1743,24 +1743,37 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      d5a:	08 95       	ret
 
 00000d5c <new_menu>:
+void set_first_child(menu* mymenu, menu* first_child) {
+	mymenu->first_child = first_child;
+}
+
+
+menu* new_menu(char* name, menu* parent) {
      d5c:	0f 93       	push	r16
      d5e:	1f 93       	push	r17
      d60:	cf 93       	push	r28
      d62:	df 93       	push	r29
      d64:	8c 01       	movw	r16, r24
      d66:	eb 01       	movw	r28, r22
+	menu* nextmenu = malloc(sizeof(menu));
      d68:	89 e0       	ldi	r24, 0x09	; 9
      d6a:	90 e0       	ldi	r25, 0x00	; 0
      d6c:	0e 94 37 08 	call	0x106e	; 0x106e <malloc>
      d70:	fc 01       	movw	r30, r24
+ 	nextmenu->title = name;
      d72:	11 83       	std	Z+1, r17	; 0x01
      d74:	00 83       	st	Z, r16
+	nextmenu->parent = parent;
      d76:	d4 83       	std	Z+4, r29	; 0x04
      d78:	c3 83       	std	Z+3, r28	; 0x03
+ 	nextmenu->right_sibling = NULL;
      d7a:	10 86       	std	Z+8, r1	; 0x08
      d7c:	17 82       	std	Z+7, r1	; 0x07
+	nextmenu->first_child = NULL;
      d7e:	16 82       	std	Z+6, r1	; 0x06
      d80:	15 82       	std	Z+5, r1	; 0x05
+	return nextmenu;
+}
      d82:	df 91       	pop	r29
      d84:	cf 91       	pop	r28
      d86:	1f 91       	pop	r17
@@ -1768,13 +1781,24 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      d8a:	08 95       	ret
 
 00000d8c <size_of_menu>:
+
+int size_of_menu(menu* mymenu) {
+	
+	int menu_size = 0;
+	
+	mymenu = mymenu->first_child;
      d8c:	dc 01       	movw	r26, r24
      d8e:	15 96       	adiw	r26, 0x05	; 5
      d90:	ed 91       	ld	r30, X+
      d92:	fc 91       	ld	r31, X
      d94:	16 97       	sbiw	r26, 0x06	; 6
+	if (mymenu == NULL) {
      d96:	30 97       	sbiw	r30, 0x00	; 0
      d98:	79 f0       	breq	.+30     	; 0xdb8 <size_of_menu+0x2c>
+		return menu_size;
+	}
+	menu_size ++;
+	while (mymenu->right_sibling != NULL) {
      d9a:	07 80       	ldd	r0, Z+7	; 0x07
      d9c:	f0 85       	ldd	r31, Z+8	; 0x08
      d9e:	e0 2d       	mov	r30, r0
@@ -1782,37 +1806,71 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      da2:	69 f0       	breq	.+26     	; 0xdbe <size_of_menu+0x32>
      da4:	21 e0       	ldi	r18, 0x01	; 1
      da6:	30 e0       	ldi	r19, 0x00	; 0
+		mymenu = mymenu->right_sibling;
+		menu_size++;
      da8:	2f 5f       	subi	r18, 0xFF	; 255
      daa:	3f 4f       	sbci	r19, 0xFF	; 255
+	mymenu = mymenu->first_child;
+	if (mymenu == NULL) {
+		return menu_size;
+	}
+	menu_size ++;
+	while (mymenu->right_sibling != NULL) {
      dac:	07 80       	ldd	r0, Z+7	; 0x07
      dae:	f0 85       	ldd	r31, Z+8	; 0x08
      db0:	e0 2d       	mov	r30, r0
      db2:	30 97       	sbiw	r30, 0x00	; 0
      db4:	c9 f7       	brne	.-14     	; 0xda8 <size_of_menu+0x1c>
      db6:	06 c0       	rjmp	.+12     	; 0xdc4 <size_of_menu+0x38>
+	
+	int menu_size = 0;
+	
+	mymenu = mymenu->first_child;
+	if (mymenu == NULL) {
+		return menu_size;
      db8:	80 e0       	ldi	r24, 0x00	; 0
      dba:	90 e0       	ldi	r25, 0x00	; 0
      dbc:	08 95       	ret
+	}
+	menu_size ++;
+	while (mymenu->right_sibling != NULL) {
      dbe:	81 e0       	ldi	r24, 0x01	; 1
      dc0:	90 e0       	ldi	r25, 0x00	; 0
      dc2:	08 95       	ret
+		mymenu = mymenu->right_sibling;
+		menu_size++;
      dc4:	82 2f       	mov	r24, r18
      dc6:	93 2f       	mov	r25, r19
+	}
+	return menu_size;
+}
      dc8:	08 95       	ret
 
 00000dca <oled_menu_print>:
+	current_menu_size = size_of_menu(current_menu);
+	oled_menu_print(current_menu);
+	return direction;
+}
+
+void oled_menu_print(menu* mymenu){
      dca:	0f 93       	push	r16
      dcc:	1f 93       	push	r17
      dce:	cf 93       	push	r28
      dd0:	df 93       	push	r29
      dd2:	ec 01       	movw	r28, r24
+	
+	oled_reset(); 
      dd4:	0e 94 21 06 	call	0xc42	; 0xc42 <oled_reset>
+	
+	current_menu_size = size_of_menu(mymenu);
      dd8:	ce 01       	movw	r24, r28
      dda:	0e 94 c6 06 	call	0xd8c	; 0xd8c <size_of_menu>
      dde:	90 93 3a 03 	sts	0x033A, r25
      de2:	80 93 39 03 	sts	0x0339, r24
+	mymenu = mymenu->first_child;
      de6:	0d 81       	ldd	r16, Y+5	; 0x05
      de8:	1e 81       	ldd	r17, Y+6	; 0x06
+	for(int i = 0; i < current_menu_size; i++){
      dea:	80 91 39 03 	lds	r24, 0x0339
      dee:	90 91 3a 03 	lds	r25, 0x033A
      df2:	18 16       	cp	r1, r24
@@ -1820,15 +1878,18 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      df6:	64 f5       	brge	.+88     	; 0xe50 <oled_menu_print+0x86>
      df8:	c0 e0       	ldi	r28, 0x00	; 0
      dfa:	d0 e0       	ldi	r29, 0x00	; 0
+		oled_pos(i,0);
      dfc:	60 e0       	ldi	r22, 0x00	; 0
      dfe:	70 e0       	ldi	r23, 0x00	; 0
      e00:	ce 01       	movw	r24, r28
      e02:	0e 94 f6 05 	call	0xbec	; 0xbec <oled_pos>
+		if(current_line == i){
      e06:	80 91 2a 01 	lds	r24, 0x012A
      e0a:	90 91 2b 01 	lds	r25, 0x012B
      e0e:	8c 17       	cp	r24, r28
      e10:	9d 07       	cpc	r25, r29
      e12:	51 f4       	brne	.+20     	; 0xe28 <oled_menu_print+0x5e>
+			oled_inv_printf(mymenu->title);
      e14:	f8 01       	movw	r30, r16
      e16:	81 81       	ldd	r24, Z+1	; 0x01
      e18:	8f 93       	push	r24
@@ -1838,6 +1899,9 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      e22:	0f 90       	pop	r0
      e24:	0f 90       	pop	r0
      e26:	09 c0       	rjmp	.+18     	; 0xe3a <oled_menu_print+0x70>
+		}
+		else{
+			oled_printf(mymenu->title);
      e28:	f8 01       	movw	r30, r16
      e2a:	81 81       	ldd	r24, Z+1	; 0x01
      e2c:	8f 93       	push	r24
@@ -1846,15 +1910,28 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      e32:	0e 94 8a 05 	call	0xb14	; 0xb14 <oled_printf>
      e36:	0f 90       	pop	r0
      e38:	0f 90       	pop	r0
+		}
+		mymenu = mymenu->right_sibling;
      e3a:	f8 01       	movw	r30, r16
      e3c:	07 81       	ldd	r16, Z+7	; 0x07
      e3e:	10 85       	ldd	r17, Z+8	; 0x08
+	
+	oled_reset(); 
+	
+	current_menu_size = size_of_menu(mymenu);
+	mymenu = mymenu->first_child;
+	for(int i = 0; i < current_menu_size; i++){
      e40:	21 96       	adiw	r28, 0x01	; 1
      e42:	80 91 39 03 	lds	r24, 0x0339
      e46:	90 91 3a 03 	lds	r25, 0x033A
      e4a:	c8 17       	cp	r28, r24
      e4c:	d9 07       	cpc	r29, r25
      e4e:	b4 f2       	brlt	.-84     	; 0xdfc <oled_menu_print+0x32>
+		}
+		mymenu = mymenu->right_sibling;
+	}
+	mymenu = mymenu->parent;
+	
      e50:	df 91       	pop	r29
      e52:	cf 91       	pop	r28
      e54:	1f 91       	pop	r17
@@ -1862,6 +1939,12 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      e58:	08 95       	ret
 
 00000e5a <oled_menu_init>:
+		menu_size++;
+	}
+	return menu_size;
+}
+
+menu* oled_menu_init(void) {
      e5a:	4f 92       	push	r4
      e5c:	5f 92       	push	r5
      e5e:	6f 92       	push	r6
@@ -1878,63 +1961,93 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      e74:	1f 93       	push	r17
      e76:	cf 93       	push	r28
      e78:	df 93       	push	r29
+	menu* main_menu = new_menu("Main Menu", NULL);
      e7a:	60 e0       	ldi	r22, 0x00	; 0
      e7c:	70 e0       	ldi	r23, 0x00	; 0
      e7e:	80 ef       	ldi	r24, 0xF0	; 240
      e80:	92 e0       	ldi	r25, 0x02	; 2
      e82:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      e86:	ec 01       	movw	r28, r24
+	menu* play_game = new_menu("Play Game", main_menu);
      e88:	bc 01       	movw	r22, r24
      e8a:	8a ef       	ldi	r24, 0xFA	; 250
      e8c:	92 e0       	ldi	r25, 0x02	; 2
      e8e:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      e92:	7c 01       	movw	r14, r24
+	menu* highscores = new_menu("Highscores", main_menu);
      e94:	be 01       	movw	r22, r28
      e96:	84 e0       	ldi	r24, 0x04	; 4
      e98:	93 e0       	ldi	r25, 0x03	; 3
      e9a:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      e9e:	8c 01       	movw	r16, r24
+	menu* Test = new_menu("Test", main_menu);
      ea0:	be 01       	movw	r22, r28
      ea2:	8f e0       	ldi	r24, 0x0F	; 15
      ea4:	93 e0       	ldi	r25, 0x03	; 3
      ea6:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      eaa:	4c 01       	movw	r8, r24
+	menu* Test1 = new_menu("Test1", Test);
      eac:	bc 01       	movw	r22, r24
      eae:	84 e1       	ldi	r24, 0x14	; 20
      eb0:	93 e0       	ldi	r25, 0x03	; 3
      eb2:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      eb6:	6c 01       	movw	r12, r24
+	menu* Test2 = new_menu("Test2", Test1);
      eb8:	bc 01       	movw	r22, r24
      eba:	8a e1       	ldi	r24, 0x1A	; 26
      ebc:	93 e0       	ldi	r25, 0x03	; 3
      ebe:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      ec2:	2c 01       	movw	r4, r24
+	menu* TestP = new_menu("TestP", play_game);
      ec4:	b7 01       	movw	r22, r14
      ec6:	80 e2       	ldi	r24, 0x20	; 32
      ec8:	93 e0       	ldi	r25, 0x03	; 3
      eca:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      ece:	5c 01       	movw	r10, r24
+	menu* TestH = new_menu("TestH", highscores);
      ed0:	b8 01       	movw	r22, r16
      ed2:	86 e2       	ldi	r24, 0x26	; 38
      ed4:	93 e0       	ldi	r25, 0x03	; 3
      ed6:	0e 94 ae 06 	call	0xd5c	; 0xd5c <new_menu>
      eda:	3c 01       	movw	r6, r24
+	
+	
+	current_menu = main_menu;
      edc:	d0 93 38 03 	sts	0x0338, r29
      ee0:	c0 93 37 03 	sts	0x0337, r28
+	current_menu_size = size_of_menu(current_menu);
      ee4:	ce 01       	movw	r24, r28
      ee6:	0e 94 c6 06 	call	0xd8c	; 0xd8c <size_of_menu>
      eea:	90 93 3a 03 	sts	0x033A, r25
      eee:	80 93 39 03 	sts	0x0339, r24
+	oled_menu_print(current_menu);
      ef2:	ce 01       	movw	r24, r28
      ef4:	0e 94 e5 06 	call	0xdca	; 0xdca <oled_menu_print>
+	mymenu->right_sibling = right_sibling;
+}
+
+
+void set_first_child(menu* mymenu, menu* first_child) {
+	mymenu->first_child = first_child;
      ef8:	fe 82       	std	Y+6, r15	; 0x06
      efa:	ed 82       	std	Y+5, r14	; 0x05
+volatile menu* current_menu;
+volatile int current_line = 2;
+volatile int current_menu_size;
+
+void set_right_sibling(menu* mymenu, menu* right_sibling) {
+	mymenu->right_sibling = right_sibling;
      efc:	f7 01       	movw	r30, r14
      efe:	10 87       	std	Z+8, r17	; 0x08
      f00:	07 83       	std	Z+7, r16	; 0x07
      f02:	f8 01       	movw	r30, r16
      f04:	90 86       	std	Z+8, r9	; 0x08
      f06:	87 82       	std	Z+7, r8	; 0x07
+}
+
+
+void set_first_child(menu* mymenu, menu* first_child) {
+	mymenu->first_child = first_child;
      f08:	f4 01       	movw	r30, r8
      f0a:	d6 82       	std	Z+6, r13	; 0x06
      f0c:	c5 82       	std	Z+5, r12	; 0x05
@@ -1947,6 +2060,12 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
      f1a:	f6 01       	movw	r30, r12
      f1c:	56 82       	std	Z+6, r5	; 0x06
      f1e:	45 82       	std	Z+5, r4	; 0x05
+	set_first_child(play_game, TestP);
+	set_first_child(highscores, TestH);
+	//set_right_sibling(Test1,Test2);
+	set_first_child(Test1, Test2);
+	return current_menu;
+}
      f20:	80 91 37 03 	lds	r24, 0x0337
      f24:	90 91 38 03 	lds	r25, 0x0338
      f28:	df 91       	pop	r29

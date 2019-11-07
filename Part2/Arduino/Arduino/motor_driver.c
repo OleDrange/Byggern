@@ -71,7 +71,7 @@ void motor_set_speed(uint8_t speed){
 	DAC_send(speed);
 }
 
-int16_t motor_read_rotation(uint8_t reset_flag){
+int16_t motor_encoder(uint8_t reset_flag){
 	
 	/*-------------------------------------------------*
 	 |	    clear/set SEL opposite of datasheet        |
@@ -111,29 +111,25 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 }
 
 void motor_calibrate() {
-	motor_set_direction(LEFT);
-	motor_set_speed(100);
-	int16_t cur_rot = motor_read_rotation(0);
+	motor_set_direction(RIGHT);
+	motor_set_speed(50);
+	int16_t cur_rot = motor_encoder(0);
 	int16_t prev_rot = cur_rot+200;
 	while(prev_rot != cur_rot) {
 		prev_rot = cur_rot;
 		_delay_ms(40);
-		cur_rot = motor_read_rotation(0);
+		cur_rot = motor_encoder(0);
 	}
 	motor_reset_encoder();
 	motor_set_speed(0);
 }
 
-void motor_move(int16_t diff_rot, uint8_t power) {
-	if (diff_rot > 100) {
-		motor_set_direction(RIGHT);
-		motor_set_speed(power);
-	} 
-	else if (diff_rot < -100) {
-		motor_set_direction(RIGHT);
-		motor_set_speed(power);
-	} 
-	else {
-		motor_set_speed(0);	
+void motor_move(uint8_t speed) {
+	if(speed < 0){
+		motor_set_direction(LEFT);
 	}
+	else{
+		motor_set_direction(RIGHT);
+	}
+	DAC_send(speed);
 }

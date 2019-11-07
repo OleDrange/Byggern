@@ -174,6 +174,15 @@
     <Compile Include="motor_driver.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="PID.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PID.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PIDtest.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="PWM_driver.c">
       <SubType>compile</SubType>
     </Compile>
