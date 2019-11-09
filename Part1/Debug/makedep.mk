@@ -10,6 +10,8 @@ CAN.c
 
 CAN_controller_driver.c
 
+GameInfo.c
+
 Joystick_driver.c
 
 oled_driver.c

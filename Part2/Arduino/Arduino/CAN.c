@@ -38,8 +38,6 @@ void can_init(uint8_t mode){
 	set_bit(EIMSK,INT2);
 	// Enable global interrupts
 	sei();
-	 
-	
 }
 
 uint8_t can_interrupt(){

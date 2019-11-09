@@ -153,6 +153,9 @@
     <Compile Include="Game.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Game.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="IR.c">
       <SubType>compile</SubType>
     </Compile>

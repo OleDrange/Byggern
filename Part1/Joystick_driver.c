@@ -50,17 +50,13 @@ Joystick joystickPos(void){
 		} else {
 		position.yPos = 0;
 	}
-	
+	position = JoystickDirection(position);
 	return position; 
 	
 	
 }
 
-Joystick JoystickDirection(void){
-	Joystick position;
-	position.Dir = NEUTRAL;
-	
-	position = joystickPos(); 
+Joystick JoystickDirection(Joystick position){
 	
 	if(position.xPos < -50){
 		position.Dir = LEFT; 
@@ -73,10 +69,15 @@ Joystick JoystickDirection(void){
 	} else if (position.yPos > 50){
 		position.Dir = UP; 
 	}
-	
-	//if(position.xPos == 0 && position.yPos == 0){
-		//position.Dir = NEUTRAL; 
-	//}
+	if(position.xPos == 0 && position.yPos == 0){
+		position.Dir = NEUTRAL; 
+	}
 	
 	return position;
+}
+int joysticButton(){
+	if((PINB & 0b00000001) != 0){ //PB0
+		return 1;
+	}
+	return 0;
 }

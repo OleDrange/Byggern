@@ -33,6 +33,6 @@ typedef struct{
 
 void Joystick_calibrate(void);
 Joystick joystickPos(void);
-Joystick JoystickDirection(void);
-
+Joystick JoystickDirection(Joystick position);
+int joysticButton();
 #endif /* JOYSTICK_DRIVER_H_ */

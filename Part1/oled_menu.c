@@ -77,7 +77,7 @@ menu* oled_menu_init(void) {
 
 
 JoystickDir oled_menu_select(void){
-	JoystickDir direction = JoystickDirection().Dir;
+	JoystickDir direction = joystickPos().Dir;
 	current_menu_size = size_of_menu(current_menu);
 	if(direction == UP){
 		current_line--;

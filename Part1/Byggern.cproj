@@ -149,6 +149,12 @@
     <Compile Include="GALselect.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="GameInfo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GameInfo.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Joystick_driver.c">
       <SubType>compile</SubType>
     </Compile>

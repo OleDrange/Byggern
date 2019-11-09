@@ -42,6 +42,7 @@ C_SRCS +=  \
 ../Byggern.c \
 ../CAN.c \
 ../CAN_controller_driver.c \
+../GameInfo.c \
 ../Joystick_driver.c \
 ../oled_driver.c \
 ../oled_menu.c \
@@ -61,6 +62,7 @@ ADC_driver.o \
 Byggern.o \
 CAN.o \
 CAN_controller_driver.o \
+GameInfo.o \
 Joystick_driver.o \
 oled_driver.o \
 oled_menu.o \
@@ -73,6 +75,7 @@ ADC_driver.o \
 Byggern.o \
 CAN.o \
 CAN_controller_driver.o \
+GameInfo.o \
 Joystick_driver.o \
 oled_driver.o \
 oled_menu.o \
@@ -85,6 +88,7 @@ ADC_driver.d \
 Byggern.d \
 CAN.d \
 CAN_controller_driver.d \
+GameInfo.d \
 Joystick_driver.d \
 oled_driver.d \
 oled_menu.d \
@@ -97,6 +101,7 @@ ADC_driver.d \
 Byggern.d \
 CAN.d \
 CAN_controller_driver.d \
+GameInfo.d \
 Joystick_driver.d \
 oled_driver.d \
 oled_menu.d \
@@ -118,6 +123,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

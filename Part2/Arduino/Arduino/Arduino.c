@@ -5,7 +5,7 @@
  *  Author: oledr
  */ 
 
-
+#define F_CPU 16000000UL
 #include <avr/io.h>
 #include <util/delay.h>
 #include "bit_macros.h"
@@ -21,8 +21,9 @@
 #include "DAC.h"
 #include "motor_driver.h"
 #include "PID.h"
+#include "Game.h"
 #include <avr/interrupt.h>
-#define F_CPU 16000000UL
+
 
 long map(long x, long in_min, long in_max, long out_min, long out_max);
 
@@ -113,8 +114,7 @@ int exersise7(void) {
 		
 	}
 }
-int main(void)
-{
+int beforeFinish(){
 	unsigned long clockspeed = F_CPU;
 	_delay_ms(20);
 	UART_init(clockspeed);
@@ -143,29 +143,24 @@ int main(void)
 			hei = can_handle_messages();
 			xout = map(hei.data[0],0,200,-100,100);
 			yout = map(hei.data[1],0,200,-100,100);
-			//for(int i = 0; i < hei.length ; i++){
-			//printf(" Joystick x = %d, Joystick y = %d ",xout,yout);
-			//}
-			//printf("\r \n");
-			
-		}
-		
-		xout = map(xout,-100,100,0,8000);
-		
-		if(xout >0 && xout < 8000){
-			
+			//printf("xout = %d , \r\n",xout);
+			xout = map(xout,-100,100,-200,8300);
+			//printf("xout = %d , \r\n",xout);
 			PID_setpos(xout);
 			
 		}
+		if(PID_NewUpdate()){
+			PID_update();
+		}
 		
-		_delay_ms(1000);
+		_delay_ms(100);
 		
 		//encoder = motor_read_rotation(0);
 		//printf(" Encoder val = %d \r\n",encoder);
 		//
-		//motor_move(RIGHT, 55);  
+		//motor_move(RIGHT, 55);
 		//_delay_ms(15000);
-		//motor_move(LEFT, 55); 
+		//motor_move(LEFT, 55);
 		////set_bit(PORTH,PH4);
 		////set_bit(PORTH,PH1);
 		////DAC_send(50); // slowest speed 0b01000000
@@ -179,6 +174,30 @@ int main(void)
 		////clear_bit(PORTH,PH1);
 		//_delay_ms(15000);
 	}
+	
+}
+int main(void)
+{
+	unsigned long clockspeed = F_CPU;
+	_delay_ms(20);
+	UART_init(clockspeed);
+	
+	can_init(MODE_NORMAL);
+	PWM_init(0.02, clockspeed);
+	servo_init(clockspeed);
+	IR_init();
+	ADC_init();
+	DAC_init();
+	motor_init();
+	motor_calibrate();
+	PID_init();
+	printf("NY START!!!!!\r\n");
+	_delay_ms(3000); //Time to calibrate
+	while(1)
+	{
+		PlayGame();
+	}
+	return 1;
     
 }
 long map(long x, long in_min, long in_max, long out_min, long out_max)

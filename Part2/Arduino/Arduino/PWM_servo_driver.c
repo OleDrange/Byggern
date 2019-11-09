@@ -21,6 +21,7 @@ void servo_init(unsigned long clock_speed){
 
 void set_servo(int servo_dir){
 	
+	//printf("servo_dir = %d  ",servo_dir);
 	float min_pw = 0.0009;
 	float max_pw = 0.0021;
 	
@@ -34,7 +35,7 @@ void set_servo(int servo_dir){
 	if (servo_pw > max_pw) {
 		servo_pw = max_pw;
 	}
-	
+	//printf("servo_pw = %d  \r\n",servo_pw);
 	PWM_pulse_set(servo_pw);
 	
 }
