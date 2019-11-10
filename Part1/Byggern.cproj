@@ -170,6 +170,12 @@
     <Compile Include="MCP2515.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="menuselections.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="menuselections.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="oled_driver.c">
       <SubType>compile</SubType>
     </Compile>

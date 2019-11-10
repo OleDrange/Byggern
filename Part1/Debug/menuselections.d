@@ -1,5 +1,5 @@
-GameInfo.d GameInfo.o: .././GameInfo.c .././GameInfo.h \
- .././Joystick_driver.h \
+menuselections.d menuselections.o: .././menuselections.c \
+ .././menuselections.h .././oled_menu.h .././Joystick_driver.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdint.h \
@@ -16,12 +16,15 @@ GameInfo.d GameInfo.o: .././GameInfo.c .././GameInfo.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\math.h \
- .././slider.h .././ADC_driver.h .././oled_menu.h .././oled_driver.h \
+ .././oled_driver.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
- .././CAN.h .././CAN_controller_driver.h .././SPI_driver.h .././MCP2515.h
+ .././CAN.h .././CAN_controller_driver.h .././SPI_driver.h .././MCP2515.h \
+ .././GameInfo.h .././slider.h .././ADC_driver.h
 
-.././GameInfo.h:
+.././menuselections.h:
+
+.././oled_menu.h:
 
 .././Joystick_driver.h:
 
@@ -57,12 +60,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\math.h:
 
-.././slider.h:
-
-.././ADC_driver.h:
-
-.././oled_menu.h:
-
 .././oled_driver.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdio.h:
@@ -76,3 +73,9 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././SPI_driver.h:
 
 .././MCP2515.h:
+
+.././GameInfo.h:
+
+.././slider.h:
+
+.././ADC_driver.h:

@@ -19,6 +19,7 @@
 #include "CAN_controller_driver.h"
 #include "CAN.h"
 #include "GameInfo.h"
+#include "menuselections.h"
 
 long map(long x, long in_min, long in_max, long out_min, long out_max);
 
@@ -130,34 +131,39 @@ int main( )
 	Joystick_calibrate();
 	oled_init();
 	menu* mymenu = oled_menu_init();
+	Joystick myjoystick;
+	gamevars mygame;
+	gamevars mygameold;
+	menu_option lastOption;
+	int updatescore = 0;
+	oled_menu_select(0);
 	can_init(MODE_NORMAL);
 	printf("NEW START!!!!");
 	while(1)
 	{
-		//TEST ENDRINGER
-		//Buttons
-		//printf("KNAPP L : %d   " ,slider_left_button());
-		//printf("KNAPP R : %d   " ,slider_right_button());
-		//
-		////Slidere
-		//
-		//slider_str slider = slider_position();
-		//
-		//printf("SLIDER L : %d  ",slider.L);
-		//printf("SLIDER R : %d \r\n" ,slider.R);
-		//
-		// MenyTEST
-		oled_menu_select();
+
 		
-		//Joystic 
-		//
-		//
-		//printf("JoistixPos x : %d  ",joystickPos().xPos);
-		//printf("JoistixPos y: %d  ",joystickPos().yPos);
-		//printf("JoistixDIR : %d  \r\n",joystickPos().Dir);
-	
+		mygame = getInfo();
+		if(mygame.enemypoints != mygameold.enemypoints || mygame.mypoints != mygameold.mypoints){
+			updatescore = 1;
+		}
 		
 		
+		
+		myjoystick= joystickPos();
+		if(myjoystick.Dir == LEFT){
+			lastOption = NONE;
+		}
+		if(myjoystick.Dir != NEUTRAL && lastOption == NONE)
+		{
+			lastOption = printgame(oled_menu_select(),mygame);
+		}
+		else if(updatescore){
+			printgame(lastOption,mygame);
+			updatescore = 0;
+		}
+		
+		mygameold = mygame;
 		sendInfo();
 		_delay_ms(200);
 	}

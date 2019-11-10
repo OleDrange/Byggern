@@ -14,6 +14,8 @@ GameInfo.c
 
 Joystick_driver.c
 
+menuselections.c
+
 oled_driver.c
 
 oled_menu.c

@@ -12,6 +12,11 @@
 #ifndef GAMEINFO_H
 #define GAMEINFO_H
 
+typedef struct {
+	int mypoints;
+	int enemypoints;
+} gamevars ;
 void sendInfo();
+gamevars getInfo();
 
 #endif GAMEINFO_H

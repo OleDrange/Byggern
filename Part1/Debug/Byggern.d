@@ -22,7 +22,7 @@ Byggern.d Byggern.o: .././Byggern.c .././DriverATmega162.h \
  .././GalSelect.h .././ADC_driver.h .././SRAM_driver.h \
  .././Joystick_driver.h .././slider.h .././oled_driver.h .././oled_menu.h \
  .././CAN_controller_driver.h .././SPI_driver.h .././MCP2515.h .././CAN.h \
- .././GameInfo.h
+ .././GameInfo.h .././menuselections.h
 
 .././DriverATmega162.h:
 
@@ -91,3 +91,5 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././CAN.h:
 
 .././GameInfo.h:
+
+.././menuselections.h:

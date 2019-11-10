@@ -125,7 +125,7 @@ int can_transmit_complete(int buffer_number){
 	if(interrupt_bits == (MCP_TX0IF + buffer_number*2)){
 			return 0;
 	}
-	printf("\r\nMELDING SENDT\r\n");
+	//printf("\r\nMELDING SENDT\r\n");
 	return 1;
 }
 

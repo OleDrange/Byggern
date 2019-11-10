@@ -196,6 +196,9 @@ int main(void)
 	while(1)
 	{
 		PlayGame();
+		
+		SendInfo();
+		
 	}
 	return 1;
     

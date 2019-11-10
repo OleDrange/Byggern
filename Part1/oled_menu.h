@@ -9,11 +9,16 @@
 #define OLED_MENU_H_
 
 #include "Joystick_driver.h"
-
+#include "oled_driver.h"
 typedef enum{
-	NEW_GAME,
-	SETTINGS,
-	DIFFICULTY
+	SinglePlayer,
+	Calibrate,
+	Easy,
+	Medium,
+	Hard,
+	Multiplayer,
+	Highscore,
+	NONE
 } menu_option;
 
 typedef struct{
@@ -26,8 +31,10 @@ typedef struct{
 	} menu;
 	
 
-JoystickDir oled_menu_select(void); 
+menu_option oled_menu_select(); 
 menu* oled_menu_init(void); 
 void oled_menu_print(menu*);
+void singleplayer(int);
+void showHighscore();
 
 #endif OLED_MENU_H_

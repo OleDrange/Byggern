@@ -44,6 +44,7 @@ C_SRCS +=  \
 ../CAN_controller_driver.c \
 ../GameInfo.c \
 ../Joystick_driver.c \
+../menuselections.c \
 ../oled_driver.c \
 ../oled_menu.c \
 ../slider.c \
@@ -64,6 +65,7 @@ CAN.o \
 CAN_controller_driver.o \
 GameInfo.o \
 Joystick_driver.o \
+menuselections.o \
 oled_driver.o \
 oled_menu.o \
 slider.o \
@@ -77,6 +79,7 @@ CAN.o \
 CAN_controller_driver.o \
 GameInfo.o \
 Joystick_driver.o \
+menuselections.o \
 oled_driver.o \
 oled_menu.o \
 slider.o \
@@ -90,6 +93,7 @@ CAN.d \
 CAN_controller_driver.d \
 GameInfo.d \
 Joystick_driver.d \
+menuselections.d \
 oled_driver.d \
 oled_menu.d \
 slider.d \
@@ -103,6 +107,7 @@ CAN.d \
 CAN_controller_driver.d \
 GameInfo.d \
 Joystick_driver.d \
+menuselections.d \
 oled_driver.d \
 oled_menu.d \
 slider.d \
@@ -123,6 +128,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

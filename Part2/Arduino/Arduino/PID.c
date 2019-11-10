@@ -72,20 +72,24 @@ void PID_update(){
 	if(e > 0) { motor_set_direction(RIGHT);}
 		else {motor_set_direction(LEFT);}
 		
-	volatile uint8_t speedout;
+	uint8_t speedout;
 	if(speed > 500){
 		speed = 500;
 	}
 	if(speed < -500){
 		speed = -500;
 	}
-	printf("Error = %d   ",e); printf("speed: %d   ", speed);
+	if (abs(e) > 1800){
+		speed = (int16_t)mapspeed(speed,0,500,40,100);
+	}
+	else
+	{
+		speed = (int16_t)mapspeed(speed,0,500,38,80);
+	}
 	speed = abs(speed);
-	printf("speed: %d   ", speed);
-	speed = (int16_t)mapspeed(speed,0,500,0,100);
+	//printf("speed: %d   ", speed);
 	
-	
-	speedout = speed; printf("speedout: %d \r\n  ", speedout);
+	speedout = speed; //printf("speedout: %d \r\n  ", speedout);
 	
 	motor_set_speed(speedout);
 }

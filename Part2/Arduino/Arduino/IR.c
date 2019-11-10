@@ -52,15 +52,16 @@ uint16_t IR_game_over() {
 			enemys = enemys + 1;
 			hasBeen0 = false;
 		}
-		
 		return 1;
 	}
 	else {
 		hasBeen0 = true;
 		return 0;
-		
 	}
 }
 uint8_t enemyScore(){
 	return enemys;
+}
+void setEnemyScore(int score){
+	enemys = score;
 }

@@ -47,7 +47,6 @@ C_SRCS +=  \
 ../Joystick_driver.c \
 ../motor_driver.c \
 ../PID.c \
-../PIDtest.c \
 ../PWM_driver.c \
 ../PWM_servo_driver.c \
 ../TWI_Master.c \
@@ -72,7 +71,6 @@ IR.o \
 Joystick_driver.o \
 motor_driver.o \
 PID.o \
-PIDtest.o \
 PWM_driver.o \
 PWM_servo_driver.o \
 TWI_Master.o \
@@ -90,7 +88,6 @@ IR.o \
 Joystick_driver.o \
 motor_driver.o \
 PID.o \
-PIDtest.o \
 PWM_driver.o \
 PWM_servo_driver.o \
 TWI_Master.o \
@@ -108,7 +105,6 @@ IR.d \
 Joystick_driver.d \
 motor_driver.d \
 PID.d \
-PIDtest.d \
 PWM_driver.d \
 PWM_servo_driver.d \
 TWI_Master.d \
@@ -126,7 +122,6 @@ IR.d \
 Joystick_driver.d \
 motor_driver.d \
 PID.d \
-PIDtest.d \
 PWM_driver.d \
 PWM_servo_driver.d \
 TWI_Master.d \
@@ -147,8 +142,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
 
 
 
