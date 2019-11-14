@@ -42,6 +42,7 @@ C_SRCS +=  \
 ../Byggern.c \
 ../CAN.c \
 ../CAN_controller_driver.c \
+../DriverATmega162.c \
 ../GameInfo.c \
 ../Joystick_driver.c \
 ../menuselections.c \
@@ -63,6 +64,7 @@ ADC_driver.o \
 Byggern.o \
 CAN.o \
 CAN_controller_driver.o \
+DriverATmega162.o \
 GameInfo.o \
 Joystick_driver.o \
 menuselections.o \
@@ -77,6 +79,7 @@ ADC_driver.o \
 Byggern.o \
 CAN.o \
 CAN_controller_driver.o \
+DriverATmega162.o \
 GameInfo.o \
 Joystick_driver.o \
 menuselections.o \
@@ -91,6 +94,7 @@ ADC_driver.d \
 Byggern.d \
 CAN.d \
 CAN_controller_driver.d \
+DriverATmega162.d \
 GameInfo.d \
 Joystick_driver.d \
 menuselections.d \
@@ -105,6 +109,7 @@ ADC_driver.d \
 Byggern.d \
 CAN.d \
 CAN_controller_driver.d \
+DriverATmega162.d \
 GameInfo.d \
 Joystick_driver.d \
 menuselections.d \
@@ -128,6 +133,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

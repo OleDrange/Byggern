@@ -144,7 +144,7 @@ int beforeFinish(){
 			xout = map(hei.data[0],0,200,-100,100);
 			yout = map(hei.data[1],0,200,-100,100);
 			//printf("xout = %d , \r\n",xout);
-			xout = map(xout,-100,100,-200,8300);
+			xout = map(xout,-100,100,-200,800);
 			//printf("xout = %d , \r\n",xout);
 			PID_setpos(xout);
 			
@@ -192,7 +192,7 @@ int main(void)
 	motor_calibrate();
 	PID_init();
 	printf("NY START!!!!!\r\n");
-	_delay_ms(3000); //Time to calibrate
+	_delay_ms(300); //Time to calibrate
 	while(1)
 	{
 		PlayGame();

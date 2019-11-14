@@ -5,16 +5,10 @@
  *  Author: oledr
  */ 
 
-#ifndef CAN_H_
-#define CAN_H_
+#ifndef CAN
+#define CAN
 
 #include "CAN_controller_driver.h"
-
-//typedef enum{
-	//GAME,
-	//DIFFICULTY,
-	//SONG
-//} message_type_t;
 
 typedef struct {
 	unsigned int id;
@@ -32,4 +26,4 @@ int can_transmit_complete(int);
 void can_message_receive(int, can_message* message);
 void can_int_vect(int*);
 
-#endif /* CAN_H_ */
+#endif 

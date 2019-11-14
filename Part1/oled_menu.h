@@ -5,20 +5,22 @@
  *  Author: juliessk
  */ 
 
-#ifndef OLED_MENU_H_
-#define OLED_MENU_H_
+#ifndef OLED_MENU
+#define OLED_MENU
 
 #include "Joystick_driver.h"
 #include "oled_driver.h"
 typedef enum{
+	NONE,
 	SinglePlayer,
-	Calibrate,
-	Easy,
-	Medium,
-	Hard,
 	Multiplayer,
 	Highscore,
-	NONE
+	Settings,
+	Difficulty,
+	Testing,
+	Easy,
+	Medium,
+	Hard
 } menu_option;
 
 typedef struct{
@@ -37,4 +39,4 @@ void oled_menu_print(menu*);
 void singleplayer(int);
 void showHighscore();
 
-#endif OLED_MENU_H_
+#endif OLED_MENU

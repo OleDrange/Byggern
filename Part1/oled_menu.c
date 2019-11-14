@@ -54,9 +54,12 @@ menu* oled_menu_init(void) {
 	menu* main_menu = new_menu("Main Menu", NULL);
 	menu* play_game = new_menu("Play Game", main_menu);
 	menu* highscores = new_menu("Highscores", main_menu);
-	menu* settings = new_menu("Settings", main_menu);
 	menu* singelP = new_menu("Singel Player", play_game);
 	menu* multiP = new_menu("Multi Player", play_game);
+	menu* difficulty = new_menu("Difficulty", main_menu);
+	menu* d_easy = new_menu("Easy", difficulty);
+	menu* d_medium = new_menu("Medium", difficulty);
+	menu* d_hard = new_menu("Hard", difficulty);
 	
 	
 	current_menu = main_menu;
@@ -65,20 +68,21 @@ menu* oled_menu_init(void) {
 
 	set_first_child(main_menu, play_game);
 	set_right_sibling(play_game, highscores);
-	set_right_sibling(highscores, settings);
-	//set_right_sibling(Test,Test1);
-	//set_first_child(Test, Test1);
+	set_right_sibling(highscores, difficulty);
+	
 	set_first_child(play_game, singelP);
 	set_right_sibling(singelP, multiP);
-	//set_first_child(highscores, TestH);
-	//set_right_sibling(Test1,Test2);
-	//set_first_child(Test1, Test2);
+	
+	set_first_child(difficulty, d_easy);
+	set_right_sibling(d_easy, d_medium);
+	set_right_sibling(d_medium, d_hard);
+
 	return current_menu;
 }
 
 
 menu_option oled_menu_select(){
-
+	
 	JoystickDir direction = joystickPos().Dir;
 	current_menu_size = size_of_menu(current_menu);
 	
@@ -102,35 +106,29 @@ menu_option oled_menu_select(){
 		else if (current_menu->title == "Highscores"){
 			return Highscore;
 		}
-		//else if (current_menu->title == "Settings"){
-			//return;
-		//}
 		else if (current_menu->title == "Multi Player"){
 			return Multiplayer;
 		}
-		//else if (current_menu->title == "Acceptable"){
-			//return MEDIUM;
-		//}
-		//else if (current_menu->title == "Wrist breaker"){
-			//return HARD;
-		//}
-		//else if (current_menu->title == "Zelda"){
-			//return ZELDA;
-		//}
-		//else if (current_menu->title == "Super Mario"){
-			//return MARIO;
-		//}
-		//else if (current_menu->title == "Underworld"){
-			//return UW;
-		//}
-		
+		else if (current_menu->title == "Easy"){
+			current_menu = current_menu->parent;
+			current_menu = current_menu->parent;
+		}
+		else if (current_menu->title == "Medium"){
+			current_menu = current_menu->parent;
+			current_menu = current_menu->parent;
+		}
+		else if (current_menu->title == "Hard"){
+			current_menu = current_menu->parent;
+			current_menu = current_menu->parent;
+		}
 	}
+	
 	if (direction == LEFT) {
 		if(current_menu->parent != NULL){
 		current_menu = current_menu->parent;
 		}
 	}
-		oled_menu_print(current_menu);
+	oled_menu_print(current_menu);
 	return NONE;
 }
 

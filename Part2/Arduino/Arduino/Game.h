@@ -5,8 +5,8 @@
  *  Author: juliessk
  */ 
 
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAME
+#define GAME
 
 #include <avr/interrupt.h>
 #include <avr/io.h>
@@ -17,4 +17,4 @@
 
 void PlayGame();
 long mapslider(int x, int in_min, int in_max, int out_min, int out_max);
-#endif GAME_H
+#endif GAME

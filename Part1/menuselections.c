@@ -15,12 +15,34 @@ char highscorelist[5][5] = {
 		
 can_message cali;
 char pointarray[4] = "";
+int NewHighscore = 0;
+char name[3] = "AAA";
+int slider;
+int chosenLetters = 0;
 menu_option printgame(menu_option choice,gamevars game)
 {
+	//if(NewHighscore = 1){
+		//oled_reset();
+		//oled_printf("Select your name:");
+		//oled_pos(1,0);
+		//slider = slider_position().R;
+		//char letter = (char)map(slider,0,255,32,50);
+		//printf("LETTER = %d     ",letter);
+		//oled_inv_printf(name);
+		//if(slider_left_button()){
+			//chosenLetters++;
+			//printf("LEFT SLIDER BUTTON     ");
+		//}
+		//if(chosenLetters > 2){
+			//NewHighscore = 0;
+		//}
+		//
+		//return choice;
+	//}
 	switch(choice){ 
 		case SinglePlayer:
 			oled_reset();
-			oled_printf("Your score is :");
+			oled_printf("Your score :");
 			oled_pos(1,0);
 			pointarray[0] = (game.mypoints%100-game.mypoints%10)/10 + '0';
 			pointarray[1] = game.mypoints%10 + '0';
@@ -29,39 +51,36 @@ menu_option printgame(menu_option choice,gamevars game)
 			{	
 				oled_pos(2,0);
 				oled_printf("GAME OVER");
+				oled_pos(3,0);
+				if(game.mypoints > score(highscorelist[4])){
+					oled_printf("NEW HIGHSCORE!!");
+					oled_pos(4,0);
+					oled_printf(pointarray);
+					NewHighscore = 1;
+				}
 			}
-			
-
 		break;
 		case Multiplayer:
-
 			oled_reset();
-			oled_printf("Your score is :");
+			oled_printf("Opponents score :");
 			oled_pos(1,0);
 			pointarray[4] = "";
-			pointarray[0] = (game.mypoints%100-game.mypoints%10)/10 + '0';
-			pointarray[1] = game.mypoints%10 + '0';
+			pointarray[0] = (game.enemypoints%100-game.enemypoints%10)/10 + '0';
+			pointarray[1] = game.enemypoints%10 + '0';
 			oled_printf(pointarray);
-
-
 		break;
+		
 		case Highscore:
-		oled_reset();
-		oled_printf("HIGHSCORES: ");
-		for(int i = 0; i < 5; i++){
-			oled_pos(i+1,0);
-			char hold[6] = "";
-			for(int j = 0; j < 5; j++){
-				hold[j] = highscorelist[i][j];
+			oled_reset();
+			oled_printf("HIGHSCORES: ");
+			for(int i = 0; i < 5; i++){
+				oled_pos(i+1,0);
+				char hold[6] = "";
+				for(int j = 0; j < 5; j++){
+					hold[j] = highscorelist[i][j];
+				}
+				oled_printf(hold);
 			}
-			oled_printf(hold);
-		}
-		break;
-		case Calibrate:
-			cali.id = 10;
-			cali.data[0] = 0;
-			cali.length = 1;
-			can_message_send(&cali);
 		break;
 	}
 	return choice;
@@ -76,9 +95,9 @@ void EditHighscore(char* array){
 	}
 }
 int score(char*array){
-	int num = (int)array[3];
+	int num = (int)array[3]-48;
 	num *= 10;
-	num += (int)array[4];
+	num += (int)array[4]-48;
 	return num;
 }
 void highscorelistupdate(int i,char*array){
@@ -93,3 +112,4 @@ void highscorelistupdate(int i,char*array){
 		highscorelist[i][z] = array[z];
 	}
 }
+

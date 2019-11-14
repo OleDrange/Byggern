@@ -6,8 +6,8 @@
  */ 
 
 
-#ifndef IR_DRIVER_H_
-#define IR_DRIVER_H_
+#ifndef IR_DRIVER
+#define IR_DRIVER
 
 
 void IR_init(void);
@@ -17,4 +17,4 @@ uint16_t IR_game_over(void);
 uint8_t enemyScore(void);
 void setEnemyScore(int score);
 
-#endif /* IR_DRIVER_ */
+#endif 

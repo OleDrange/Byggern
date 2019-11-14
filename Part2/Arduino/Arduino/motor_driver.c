@@ -73,18 +73,11 @@ void motor_set_speed(uint8_t speed){
 
 int16_t motor_encoder(uint8_t reset_flag){
 	
-	/*-------------------------------------------------*
-	 |	    clear/set SEL opposite of datasheet        |
-	 |  We don't know why, perhaps faulty motor box?   |
-	 *-------------------------------------------------*/
-	
-	//Set !OE low to enable output of encoder
 	clear_bit(PORTH, PH5);
 	
 	//Set SEL high to get low byte
 	set_bit(PORTH, PH3);
 	
-	//Wait about 20 microseconds
 	_delay_us(60);
 	
 	//Read LSB
@@ -93,13 +86,11 @@ int16_t motor_encoder(uint8_t reset_flag){
 	//Set SEL low to get high byte
 	clear_bit(PORTH, PH3);
 	
-	//Wait about 20 microseconds
 	_delay_us(60);
 	
 	//Read MSB
 	uint8_t high = PINK;
 	if (reset_flag) {
- 		//Toggle !RST to reset encoder
 		motor_reset_encoder();
 	}
 	//Set !OE high to disable output of encoder
@@ -112,7 +103,7 @@ int16_t motor_encoder(uint8_t reset_flag){
 
 void motor_calibrate() {
 	motor_set_direction(RIGHT);
-	motor_set_speed(50);
+	motor_set_speed(70);
 	int16_t cur_rot = motor_encoder(0);
 	int16_t prev_rot = cur_rot+200;
 	while(prev_rot != cur_rot) {
@@ -122,14 +113,4 @@ void motor_calibrate() {
 	}
 	motor_reset_encoder();
 	motor_set_speed(0);
-}
-
-void motor_move(uint8_t speed) {
-	if(speed < 0){
-		motor_set_direction(LEFT);
-	}
-	else{
-		motor_set_direction(RIGHT);
-	}
-	DAC_send(speed);
 }

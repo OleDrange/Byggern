@@ -44,7 +44,6 @@ C_SRCS +=  \
 ../DAC.c \
 ../Game.c \
 ../IR.c \
-../Joystick_driver.c \
 ../motor_driver.c \
 ../PID.c \
 ../PWM_driver.c \
@@ -68,7 +67,6 @@ CAN_controller_driver.o \
 DAC.o \
 Game.o \
 IR.o \
-Joystick_driver.o \
 motor_driver.o \
 PID.o \
 PWM_driver.o \
@@ -85,7 +83,6 @@ CAN_controller_driver.o \
 DAC.o \
 Game.o \
 IR.o \
-Joystick_driver.o \
 motor_driver.o \
 PID.o \
 PWM_driver.o \
@@ -102,7 +99,6 @@ CAN_controller_driver.d \
 DAC.d \
 Game.d \
 IR.d \
-Joystick_driver.d \
 motor_driver.d \
 PID.d \
 PWM_driver.d \
@@ -119,7 +115,6 @@ CAN_controller_driver.d \
 DAC.d \
 Game.d \
 IR.d \
-Joystick_driver.d \
 motor_driver.d \
 PID.d \
 PWM_driver.d \
@@ -142,8 +137,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

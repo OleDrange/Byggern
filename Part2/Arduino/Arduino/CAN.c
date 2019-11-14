@@ -151,14 +151,3 @@ void can_int_vect(int* v) {
 	v[0] = (int_flag & MCP_RX0IF);
 	v[1] = (int_flag & MCP_RX1IF);
 }
-
-int can_error(void){
-	uint8_t err = mcp_2515_read(MCP_CANINTF);
-	uint8_t mask = 0b00100000;
-	if (mask & err == mask){
-		printf("Error in CAN!\n");
-		mcp_2515_bit_modify(MCP_CANINTF,mask,0);
-		return 1;
-	}
-	return 0;
-}

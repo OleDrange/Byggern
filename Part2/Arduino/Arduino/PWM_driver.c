@@ -30,8 +30,6 @@ void PWM_init(float period_sec, unsigned long clock_frequency){
 	clear_bit(TCCR1A, COM1A0);
 	pwm_timer_freq = (uint32_t)clock_frequency/prescaler;
 	PWM_set_period(period_sec);
-	
-
 	// Set PB5 to output mode
 	set_bit(DDRB, PB5);
 }
@@ -42,7 +40,6 @@ void PWM_set_period(float sec){
 	set_bit(TCCR1B, CS12);
 	clear_bit(TCCR1B, CS11);
 	clear_bit(TCCR1B, CS10);
-	
 	// Set period to 20 ms (prescaler 256)
 	uint16_t period = pwm_timer_freq*sec - 0.5;
 	ICR1 = period;
@@ -50,7 +47,6 @@ void PWM_set_period(float sec){
 }
 
 void PWM_pulse_set(float sec) {
-	
 	pulse = pwm_timer_freq*sec - 0.5;
 	OCR1A = pulse;
 }

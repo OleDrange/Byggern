@@ -7,8 +7,8 @@
 
 
 
-#ifndef ADC_H_
-#define ADC_H_
+#ifndef ADC
+#define ADC
 
 void ADC_init(void);
 
@@ -18,4 +18,4 @@ char ADC_get_data(void);
 
 void ADC_start_read(ADC_channel channel);
 
-#endif /* ADC_H_ */
+#endif

@@ -5,8 +5,8 @@
  *  Author: oledr
  */ 
 
-#ifndef JOYSTICK_DRIVER_H_
-#define JOYSTICK_DRIVER_H_
+#ifndef JOYSTICK_DRIVER
+#define JOYSTICK_DRIVER
 
 
 #include <stdlib.h>
@@ -35,4 +35,4 @@ void Joystick_calibrate(void);
 Joystick joystickPos(void);
 Joystick JoystickDirection(Joystick position);
 int joysticButton();
-#endif /* JOYSTICK_DRIVER_H_ */
+#endif

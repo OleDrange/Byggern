@@ -10,11 +10,14 @@ can_message canMessage;
 long Slider_L;
 int Slider_R;
 int LeftButton;
-int LeftButtonhold;
+int RightButton;
+int solonoidFlag;
 long setpunktmotor;
 int servo;
 int points = 0;
 int Reset;
+int sendinfoFlag =0;
+int menuOption = 0;
 void PlayGame(){
 	//printf("PLAY GAME ");
 	DDRB |= (1<<PB6);
@@ -24,7 +27,13 @@ void PlayGame(){
 		Slider_L = canMessage.data[0];   //printf("SLIDER_L = %d    ",Slider_L);
 		Slider_R = canMessage.data[1];	 //printf("SLIDER_R = %d    ",Slider_R);
 		LeftButton = canMessage.data[2]; //printf("LeftButton = %d   \r\n ",LeftButton);
-		if(canMessage.data[3] == 'R'){
+		RightButton = canMessage.data[3]; 
+		menuOption = canMessage.data[4];
+		printf("MENU OPTION    %d    ",menuOption);
+		if(RightButton){
+			motor_calibrate();
+		}
+		if(canMessage.data[5] == 'R' || menuOption == 0){
 			Reset = 1;
 			points = 0;
 			setEnemyScore(0);
@@ -33,43 +42,55 @@ void PlayGame(){
 		{
 			Reset = 0;
 		}
-		//printf("RESET  %d  \r\n", Reset);
-		setpunktmotor = mapslider(Slider_R,0,255,-100,8300);
-		PID_setpos(setpunktmotor);
+	}
+		if(menuOption == 1 || menuOption == 2 || menuOption == 4){
+			//printf("RESET  %d  \r\n", Reset);
+			setpunktmotor = mapslider(Slider_R,0,255,8600,-100);
+			PID_setpos(setpunktmotor);
+					
+			servo = mapslider(Slider_L,0,255,-100,100);
+					
+			set_servo(servo);
+			//printf("leftbutton = %d     leftbuttonhold = %d  \r\n", LeftButton,LeftButtonhold);
+			if(!solonoidFlag && LeftButton){
+				solonoidFlag = 1;
+				HitBall();
+				if(menuOption == 1 && enemyScore() == 0){
+					points++;
+				}
+			}
+			if(!LeftButton){
+				solonoidFlag = 0;
+			}
 		
-		servo = mapslider(Slider_L,0,255,100,-100);
-		
-		set_servo(servo);
-		//printf("leftbutton = %d     leftbuttonhold = %d  \r\n", LeftButton,LeftButtonhold);
-		if((LeftButtonhold != LeftButton) && LeftButton){
-			HitBall();
+			if(PID_NewUpdate()){
+				PID_update();
+			}
 		}
-	}
-	if(PID_NewUpdate()){
-		PID_update();
-	}
-	LeftButtonhold = LeftButton;
-	_delay_ms(100);
+
 }
 void HitBall(){
 	
 	PORTB |= (1<<PB6);
 	_delay_ms(1000);
 	PORTB &= ~(1<<PB6);
-	points++;
-	//printf("POINTS = %d \r\n",points);
 }
 
 void SendInfo(){
-	IR_game_over();
-	can_message canMessageOut;
-	canMessageOut.data[0] = enemyScore();
-	canMessageOut.data[1] = points;
-	canMessageOut.length = 2;
-	canMessageOut.id = 1;
-	can_message_send(&canMessageOut);
-	printf("POINTSSEND = %d    ",points);
-	printf("ENEMYPOINT = %d \r\n",enemyScore());
+	sendinfoFlag++;
+	if(sendinfoFlag > 20){
+		IR_game_over();
+		can_message canMessageOut;
+		canMessageOut.data[0] = enemyScore();
+		canMessageOut.data[1] = points;
+		canMessageOut.length = 2;
+		canMessageOut.id = 1;
+		can_message_send(&canMessageOut);
+		printf("POINTSSEND = %d    ",points);
+		printf("ENEMYPOINT = %d \r\n",enemyScore());
+		sendinfoFlag = 0;
+	}
+	
 }
 
 long mapslider(int x, int in_min, int in_max, int out_min, int out_max){

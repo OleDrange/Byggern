@@ -13,13 +13,12 @@
 
 #include "bit_macros.h"
 #include "ADC_driver.h"
-//#include "joystick_driver.h"
 
 #ifndef ADC_ADDRESS
 #define ADC_ADDRESS 0x1400
 #endif
 
-volatile char* ext_adc = ADC_ADDRESS;	//Create a pointer to the array of all addresses we will write to. ADC starting at 0x1400.
+volatile char* ext_adc = ADC_ADDRESS;
 volatile char ADC_data;
 
 ISR(INT1_vect){
@@ -29,24 +28,22 @@ ISR(INT1_vect){
 
 void ADC_init(void){
 	
-	//INITIALIZE INTERRUPT ON PIN PD3
 
-	// Button input
 	clear_bit(DDRD, PD3);
-	set_bit(PORTD, PD3);	//Set pull-up resistor
-	// Disable global interrupts
+	set_bit(PORTD, PD3);	
+	
 	cli();
-	// Interrupt on falling edge PD3
+	
 	set_bit(MCUCR, ISC11);
 	clear_bit(MCUCR, ISC10);
-	// Enable interrupt on PD3
+	
 	set_bit(GICR,INT1);
-	// Enable global interrupts
+
 	sei();
 }
 
 char get_ADC_data(void){
-	return ext_adc[0x00]; //ADC_data;
+	return ext_adc[0x00]; 
 }
 
 void ADC_start_read(ADC_channel channel){
@@ -67,7 +64,6 @@ void ADC_start_read(ADC_channel channel){
 		break;
 		default:
 		printf("Not valid channel");
-		return EXIT_FAILURE;
 	}
 	
 	ext_adc[0] = data;

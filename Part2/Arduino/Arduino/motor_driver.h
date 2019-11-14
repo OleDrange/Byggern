@@ -5,8 +5,8 @@
  *  Author: juliessk
  */ 
 
-#ifndef MOTOR_DRIVER_H_
-#define MOTOR_DRIVER_H_
+#ifndef MOTOR_DRIVER
+#define MOTOR_DRIVER
 
 typedef enum {LEFT, RIGHT} motor_direction_t;
 
@@ -19,4 +19,4 @@ void motor_reset_encoder();
 void motor_calibrate();
 void motor_move(uint8_t speed);
 
-#endif /* MOTOR_DRIVER_H_ */
+#endif

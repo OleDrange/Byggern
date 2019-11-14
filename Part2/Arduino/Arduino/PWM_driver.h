@@ -5,8 +5,8 @@
  *  Author: juliessk
  */ 
 
-#ifndef PWM_DRIVER_H_
-#define PWM_DRIVER_H_
+#ifndef PWM_DRIVER
+#define PWM_DRIVER
 
 void PWM_init(float period_sec, unsigned long clock_frequency);
 
@@ -15,4 +15,4 @@ void PWM_set_period(float sec);
 void PWM_pulse_set(float sec);
 
 
-#endif /* PWM_DRIVER_H_ */
+#endif 

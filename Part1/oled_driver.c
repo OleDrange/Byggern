@@ -19,9 +19,7 @@ volatile char* ext_oled_data = OLED_DATA_ADDRESS;
 
 volatile oled_position_t position;
 
-volatile int fontSize = 8;
-const char* const font[] PROGMEM = {font_4x6, font_5x7, font_8x8};
-int current_font = FONT_8X8;
+const fontSize = 8;
 
 void oled_is_out_of_bounds() {
 	if (position.col > 127) {
@@ -30,20 +28,6 @@ void oled_is_out_of_bounds() {
 		if (position.row > 7) {
 			position.row = 0;
 		}
-	}
-}
-
-void switch_font(fontName name) {
-	current_font = name;
-	switch(name){
-		case(FONT_4X6):
-		fontSize = 4;
-		case(FONT_5X7):
-		fontSize = 5;
-		case(FONT_5X7W):
-		fontSize = 5;
-		case(FONT_8X8):
-		fontSize = 8;
 	}
 }
 
@@ -101,18 +85,6 @@ void oled_inv_printf(char* data, ...){
 	va_end(args);
 	
 }
-
-int long_string(char* data){
-	if (strlen(data)*fontSize > 128){
-		return 1;
-	}
-	return 0;
-}
-
-void oled_align_centre(char* title) {
-	oled_goto_column(64- fontSize*strlen(title)/2);
-}
-
 
 
 void oled_init(){
@@ -184,16 +156,6 @@ void oled_goto_column(int column){
 	}
 	
 }
-
-void oled_goto_letter(int letterPlace){
-	if (letterPlace <= 0) {
-		oled_goto_column(0);
-	}
-	else {
-		oled_goto_column(letterPlace*fontSize-1);
-	}
-}
-
 void oled_clear_line(int line){
 	oled_pos(line, 0);
 	

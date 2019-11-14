@@ -17,7 +17,7 @@ volatile int flagpid = 0;
 
 double timestep = 0.016;
 double Kp = 0.08;
-double Ki = 0.1;
+double Ki = 2;
 double Kd = 0.0009;
 int16_t e;
 int16_t abse;

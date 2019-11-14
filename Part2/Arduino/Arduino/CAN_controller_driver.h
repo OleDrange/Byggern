@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include "SPI_driver.h"
 #include "MCP2515.h"
+#include "bit_macros.h"
 
 uint8_t mcp_2515_init(uint8_t mode);
 
@@ -25,6 +26,6 @@ void mcp_2515_request_to_send(char buffer);
 void mcp_2515_bit_modify(uint8_t adress, uint8_t mask, uint8_t data);
 uint8_t mcp_2515_read_status(void);
 
-// Page 63 in the datasheet
+// Page 63 
 
-#endif /* CAN_CONTROLLER_DRIVER */
+#endif 

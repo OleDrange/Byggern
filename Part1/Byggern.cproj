@@ -140,13 +140,13 @@
     <Compile Include="CAN_controller_driver.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="DriverATmega162.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DriverATmega162.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="fonts.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="GALselect.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GameInfo.c">
@@ -159,9 +159,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Joystick_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LatchTest.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="CAN_controller_driver.h">

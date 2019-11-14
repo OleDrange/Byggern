@@ -16,8 +16,6 @@ Game.c
 
 IR.c
 
-Joystick_driver.c
-
 motor_driver.c
 
 PID.c

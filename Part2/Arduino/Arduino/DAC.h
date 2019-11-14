@@ -5,11 +5,10 @@
  *  Author: juliessk
  */ 
 
-#ifndef DAC_DRIVER_H_
-#define DAC_DRIVER_H_
-
+#ifndef DAC_DRIVER
+#define DAC_DRIVER
 DAC_init();
 DAC_send(uint8_t data);
 
 
-#endif /* DAC_DRIVER_H_ */
+#endif

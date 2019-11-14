@@ -16,7 +16,7 @@ typedef struct {
 	int mypoints;
 	int enemypoints;
 } gamevars ;
-void sendInfo();
+void sendInfo(menu_option);
 gamevars getInfo();
 
 #endif GAMEINFO_H

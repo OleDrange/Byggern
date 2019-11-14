@@ -35,7 +35,6 @@ char SPI_read() {
 	
 	/* Start shifting registers by putting a char in the register */
 	SPDR = 0x00;
-	//_delay_ms(10);
 	/* Wait for receive complete */ 
 	loop_until_bit_is_set(SPSR,SPIF);
 	

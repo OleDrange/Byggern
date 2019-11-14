@@ -16,7 +16,8 @@ Game.d Game.o: .././Game.c .././Game.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\math.h \
  .././CAN.h .././CAN_controller_driver.h .././SPI_driver.h .././MCP2515.h \
- .././PID.h .././motor_driver.h .././DAC.h .././PWM_servo_driver.h
+ .././bit_macros.h .././PID.h .././motor_driver.h .././DAC.h \
+ .././PWM_servo_driver.h
 
 .././Game.h:
 
@@ -59,6 +60,8 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././SPI_driver.h:
 
 .././MCP2515.h:
+
+.././bit_macros.h:
 
 .././PID.h:
 

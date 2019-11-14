@@ -162,12 +162,6 @@
     <Compile Include="IR.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Joystick_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Joystick_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="MCP2515.h">
       <SubType>compile</SubType>
     </Compile>

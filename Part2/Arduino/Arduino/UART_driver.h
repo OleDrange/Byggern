@@ -7,11 +7,11 @@
 
 
 
-#ifndef UART_DRIVER_H_
-#define UART_DRIVER_H_
+#ifndef UART_DRIVER
+#define UART_DRIVER
 
 void UART_init(unsigned long clock_speed);
 int put_char(unsigned char c);
 int get_char(void);
 
-#endif /* MAX233_DRIVER_H_ */
+#endif 

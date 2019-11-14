@@ -6,10 +6,9 @@
  */ 
 
 
-#ifndef ADC_DRIVER_H_
-#define ADC_DRIVER_H_
-
+#ifndef ADC_DRIVER
+#define ADC_DRIVER
 uint16_t ADC_read();
 void ADC_init();
 
-#endif /* ADC_DRIVER_H_ */
+#endif

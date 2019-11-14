@@ -6,8 +6,8 @@
  */ 
 
 
-#ifndef OLED_DRIVER_H_
-#define OLED_DRIVER_H_
+#ifndef OLED_DRIVER
+#define OLED_DRIVER
 
 #include <stdint.h>
 #include <stdio.h>
@@ -21,8 +21,6 @@ int oled_inv_put_char(unsigned char c);
 int long_string(char* data);
 void write_command(uint8_t command);
 
-typedef enum{FONT_4X6, FONT_5X7, FONT_5X7W, FONT_8X8} fontName;
-void switch_font(fontName name);
 void oled_goto_letter(int letterPlace);
 
 typedef struct {
@@ -37,4 +35,4 @@ void oled_goto_column(int column);
 void oled_clear_line(int line);
 void oled_fill_line(int line);
 void oled_pos(int row, int column);
-#endif /* OLED_DRIVER_H_ */
+#endif 

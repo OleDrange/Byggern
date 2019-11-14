@@ -7,9 +7,7 @@
 
 
 #include "DriverATmega162.h"
-#include "LatchTest.h"
 #include "SRAMTestProgram.h"
-#include "GalSelect.h"
 #include "ADC_driver.h"
 #include "SRAM_driver.h"
 #include "Joystick_driver.h"
@@ -139,18 +137,22 @@ int main( )
 	oled_menu_select(0);
 	can_init(MODE_NORMAL);
 	printf("NEW START!!!!");
+	int joystickFlag =0;
 	while(1)
 	{
-
-		
 		mygame = getInfo();
 		if(mygame.enemypoints != mygameold.enemypoints || mygame.mypoints != mygameold.mypoints){
 			updatescore = 1;
 		}
 		
-		
-		
 		myjoystick= joystickPos();
+		
+		joystickFlag++;
+		if(joystickFlag > 100){
+			
+			joystickFlag = 0;
+		}
+
 		if(myjoystick.Dir == LEFT){
 			lastOption = NONE;
 		}
@@ -164,8 +166,8 @@ int main( )
 		}
 		
 		mygameold = mygame;
-		sendInfo();
-		_delay_ms(200);
+		sendInfo(lastOption);
+		//_delay_ms(200);
 	}
 	return 1;
 }
