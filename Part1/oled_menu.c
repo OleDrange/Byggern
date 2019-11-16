@@ -110,16 +110,16 @@ menu_option oled_menu_select(){
 			return Multiplayer;
 		}
 		else if (current_menu->title == "Easy"){
-			current_menu = current_menu->parent;
-			current_menu = current_menu->parent;
+			//current_menu = current_menu->parent;
+			//current_menu = current_menu->parent;
 		}
 		else if (current_menu->title == "Medium"){
-			current_menu = current_menu->parent;
-			current_menu = current_menu->parent;
+			//current_menu = current_menu->parent;
+			//current_menu = current_menu->parent;
 		}
 		else if (current_menu->title == "Hard"){
-			current_menu = current_menu->parent;
-			current_menu = current_menu->parent;
+			//current_menu = current_menu->parent;
+			//current_menu = current_menu->parent;
 		}
 	}
 	

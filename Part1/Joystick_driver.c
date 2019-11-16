@@ -30,7 +30,7 @@ Joystick joystickPos(void){
 	position.yPos = 0;
 	
 	ADC_start_read(CHANNEL1);
-	_delay_us(200);
+	_delay_ms(5);
 	x = get_ADC_data();
 	
 	if(x > center_x){
@@ -41,7 +41,7 @@ Joystick joystickPos(void){
 		position.xPos = 0;
 	}
 	ADC_start_read(CHANNEL2);
-	_delay_us(200);
+	_delay_ms(5);
 	y = get_ADC_data();
 	if(y > center_y){
 		position.yPos = 100 * (y - center_y) / (0xFF - center_y);

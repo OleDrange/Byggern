@@ -15,7 +15,7 @@
 #include <avr/delay.h>
 
 volatile int flag = 0;
-
+can_message message1;
 
 ISR(INT2_vect){ 
 	flag = 1; 
@@ -52,10 +52,11 @@ can_message can_handle_messages(){
 	uint8_t v[2] = {0};
 
 	can_int_vect(v);
-
-	can_message message1;
+	
+	
 	if (v[0]){
 		can_message_receive(0, &message1);
+		//printf("Message id = %d    ",message1.id);
 		mcp_2515_write(MCP_CANINTF,0);
 		mcp_2515_bit_modify(MCP_CANINTF, 1, 0);
 		//mcp_2515_bit_modify(MCP_CANINTF, 1, 0);
@@ -79,8 +80,8 @@ can_message can_handle_messages(){
 		}
 		return message2;
 	}
-	
-	return message1;
+	can_message re;
+	return re;
 }
 
 void can_message_send(can_message* message){

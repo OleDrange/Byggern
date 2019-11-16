@@ -122,7 +122,7 @@ void can_message_send(can_message* message){
 int can_transmit_complete(int buffer_number){
 	uint8_t transmit_flag = mcp_2515_read(MCP_CANINTF);
 	uint8_t interrupt_bits = (transmit_flag & (MCP_TX0IF + buffer_number*2));
-
+	
 	if(interrupt_bits == (MCP_TX0IF + buffer_number*2)){
 			return 0;
 	}

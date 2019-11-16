@@ -15,30 +15,16 @@ char highscorelist[5][5] = {
 		
 can_message cali;
 char pointarray[4] = "";
-int NewHighscore = 0;
-char name[3] = "AAA";
-int slider;
+char name[5] = "AAA00";
+long slider=0;
+long letter = 0;
+long lastletter = 100;
 int chosenLetters = 0;
+int sliderbuttonhold = 0;
+long maplols(long x, long in_min, long in_max, long out_min, long out_max);
+int ChoseName();
 menu_option printgame(menu_option choice,gamevars game)
 {
-	//if(NewHighscore = 1){
-		//oled_reset();
-		//oled_printf("Select your name:");
-		//oled_pos(1,0);
-		//slider = slider_position().R;
-		//char letter = (char)map(slider,0,255,32,50);
-		//printf("LETTER = %d     ",letter);
-		//oled_inv_printf(name);
-		//if(slider_left_button()){
-			//chosenLetters++;
-			//printf("LEFT SLIDER BUTTON     ");
-		//}
-		//if(chosenLetters > 2){
-			//NewHighscore = 0;
-		//}
-		//
-		//return choice;
-	//}
 	switch(choice){ 
 		case SinglePlayer:
 			oled_reset();
@@ -53,10 +39,17 @@ menu_option printgame(menu_option choice,gamevars game)
 				oled_printf("GAME OVER");
 				oled_pos(3,0);
 				if(game.mypoints > score(highscorelist[4])){
+					name[3] = pointarray[0];
+					name[4] = pointarray[1];
 					oled_printf("NEW HIGHSCORE!!");
 					oled_pos(4,0);
 					oled_printf(pointarray);
-					NewHighscore = 1;
+					_delay_ms(2000);
+					int hold = 0;
+					int test = ChoseName();
+					chosenLetters = 0;
+					//sendReset();
+					return Highscore;
 				}
 			}
 		break;
@@ -106,10 +99,37 @@ void highscorelistupdate(int i,char*array){
 		for(int z = 0; z < 5; z++){
 			highscorelist[j+1][z] = highscorelist[j][z];
 		}
-		
 	}
 	for(int z = 0; z < 5; z++){
 		highscorelist[i][z] = array[z];
 	}
 }
 
+long maplols(long x, long in_min, long in_max, long out_min, long out_max)
+{
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+int ChoseName(){
+	while(chosenLetters < 3){
+		slider = slider_position().R;
+		letter = maplols(slider,0,255,65,90);
+		name[chosenLetters] = (char)letter;
+		if(lastletter != letter){
+			oled_reset();
+			oled_printf("Select your name:");
+			oled_pos(1,0);
+			oled_printf(name);
+		}
+		lastletter = letter;
+		int sliderbutton = 0;
+		if(slider_left_button() > 0){
+			sliderbutton = 1;
+		}
+		if(sliderbutton && sliderbutton != sliderbuttonhold){
+			chosenLetters = chosenLetters + 1;
+		}
+		sliderbuttonhold = sliderbutton;
+	}
+	EditHighscore(name);
+	return chosenLetters;
+}

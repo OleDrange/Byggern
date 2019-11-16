@@ -9,8 +9,8 @@
 #include "DAC.h"
 
 ISR(TIMER2_OVF_vect);
-uint8_t PID_NewUpdate();
-void PID_update();
 void PID_setpos(int16_t SETPUNKT);
 void PID_init();
+void PID_start();
+void PID_stop();
 long mapspeed(int16_t x, int16_t in_min, int16_t in_max, int16_t out_min, int16_t out_max);

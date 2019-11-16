@@ -10,10 +10,10 @@
 slider_str slider_position(void){
 	slider_str sliderposition;
 	ADC_start_read(CHANNEL3);
-	_delay_us(200);
+	_delay_ms(5);
 	sliderposition.L = get_ADC_data();
 	ADC_start_read(CHANNEL4);
-	_delay_us(200);
+	_delay_ms(5);
 	sliderposition.R =  get_ADC_data();
 	
 	return sliderposition;
