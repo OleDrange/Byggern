@@ -12,12 +12,10 @@
 #include "oled_menu.h"
 #include "CAN.h"
 #include "GameInfo.h"
-#include "slider.h"
-#include "GameInfo.h"
-
+#include "highscorefix.h"
 
 menu_option printgame(menu_option,gamevars);
-void EditHighscore(char*);
 
 
-#endif menuselection
+
+#endif 

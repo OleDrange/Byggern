@@ -21,7 +21,8 @@ menuselections.d menuselections.o: .././menuselections.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
  .././CAN.h .././CAN_controller_driver.h .././SPI_driver.h .././MCP2515.h \
- .././GameInfo.h .././slider.h .././ADC_driver.h
+ .././GameInfo.h .././slider.h .././ADC_driver.h .././highscorefix.h \
+ .././SRAM_driver.h
 
 .././menuselections.h:
 
@@ -80,3 +81,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././slider.h:
 
 .././ADC_driver.h:
+
+.././highscorefix.h:
+
+.././SRAM_driver.h:

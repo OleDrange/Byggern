@@ -40,6 +40,21 @@ void sendReset(){
 	canMessage.length = 1;
 	can_message_send(&canMessage);
 }
+void sendDificulty(menu_option diff){
+	can_message canMessage;
+	canMessage.id = 3;
+	if(diff == Easy){
+		canMessage.data[0] = 0;
+	}
+	else if (diff == Medium){
+		canMessage.data[0] = 1;
+	}
+	else{
+		canMessage.data[0] = 2;
+	}
+	canMessage.length = 1;
+	can_message_send(&canMessage);
+}
 gamevars getInfo(){
 	if(can_interrupt()){
 		newmessage = can_handle_messages();

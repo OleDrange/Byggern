@@ -24,7 +24,7 @@ void PlayGame(){
 	if (can_interrupt()){
 		
 		canMessage = can_handle_messages();
-		printf("ID = %d \r\n",canMessage.id);
+		//printf("ID = %d \r\n",canMessage.id);
 		if(canMessage.id == 1){
 			Slider_L = canMessage.data[0];   
 			Slider_R = canMessage.data[1];	 
@@ -34,6 +34,21 @@ void PlayGame(){
 			if(RightButton){
 				motor_calibrate();
 			}
+		}
+		else if (canMessage.id == 3){
+			if (canMessage.data[0] == 0)
+			{
+				PID_SET_EASY();
+			}
+			else if (canMessage.data[0] == 1)
+			{
+				PID_SET_MEDIUM();
+			}
+			else
+			{
+				PID_SET_HARD();
+			}
+			
 		}
 		if(canMessage.id == 2){
 			Reset = 1;
@@ -79,7 +94,7 @@ void HitBall(){
 void SendInfo(){
 	if(menuOption == 1 || menuOption == 2 || menuOption == 4 || Reset){
 		sendinfoFlag++;
-		if(sendinfoFlag > 1000){ // to not overuse the canbuss
+		if(sendinfoFlag > 500){ // to not overuse the canbuss
 			IR_game_over();
 			can_message canMessageOut;
 			canMessageOut.data[0] = enemyScore();
@@ -87,10 +102,7 @@ void SendInfo(){
 			canMessageOut.length = 2;
 			canMessageOut.id = 1;
 			can_message_send(&canMessageOut);
-			//printf("POINTSSEND = %d    ",points);
-			//printf("ENEMYPOINT = %d \r\n",enemyScore());
 			sendinfoFlag = 0;
-			//printf("TESTING \r\n");
 		}
 		
 	}

@@ -47,7 +47,7 @@ uint16_t IR_average_filter() {
 }
 
 uint16_t IR_game_over() {
-	if (IR_average_filter() < 200) {
+	if (IR_average_filter() < 100) {
 		if(hasBeen0){
 			enemys = enemys + 1;
 			hasBeen0 = false;

@@ -8,7 +8,7 @@
 #include "oled_menu.h"
 
 
-volatile menu* current_menu;
+menu* current_menu;
 volatile int current_line = 2;
 volatile int current_menu_size;
 volatile int print;
@@ -110,16 +110,13 @@ menu_option oled_menu_select(){
 			return Multiplayer;
 		}
 		else if (current_menu->title == "Easy"){
-			//current_menu = current_menu->parent;
-			//current_menu = current_menu->parent;
+			return Easy;
 		}
 		else if (current_menu->title == "Medium"){
-			//current_menu = current_menu->parent;
-			//current_menu = current_menu->parent;
+			return Medium;
 		}
 		else if (current_menu->title == "Hard"){
-			//current_menu = current_menu->parent;
-			//current_menu = current_menu->parent;
+			return Hard;
 		}
 	}
 	
@@ -147,11 +144,16 @@ void goto_menu() {
 }
 void oled_menu_print(menu* mymenu){
 	oled_reset(); 
-	
+	oled_printf("----------------");
+	oled_pos(1,0);
+	oled_printf(mymenu->title);
+	oled_pos(2,0);
+	oled_printf("----------------");
+	oled_pos(4,0);
 	current_menu_size = size_of_menu(mymenu);
 	mymenu = mymenu->first_child;
 	for(int i = 0; i < current_menu_size; i++){
-		oled_pos(i,0);
+		oled_pos(i+4,0);
 		if(current_line == i){
 			oled_inv_printf(mymenu->title);
 		}

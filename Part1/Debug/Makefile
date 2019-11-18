@@ -44,6 +44,7 @@ C_SRCS +=  \
 ../CAN_controller_driver.c \
 ../DriverATmega162.c \
 ../GameInfo.c \
+../highscorefix.c \
 ../Joystick_driver.c \
 ../menuselections.c \
 ../oled_driver.c \
@@ -66,6 +67,7 @@ CAN.o \
 CAN_controller_driver.o \
 DriverATmega162.o \
 GameInfo.o \
+highscorefix.o \
 Joystick_driver.o \
 menuselections.o \
 oled_driver.o \
@@ -81,6 +83,7 @@ CAN.o \
 CAN_controller_driver.o \
 DriverATmega162.o \
 GameInfo.o \
+highscorefix.o \
 Joystick_driver.o \
 menuselections.o \
 oled_driver.o \
@@ -96,6 +99,7 @@ CAN.d \
 CAN_controller_driver.d \
 DriverATmega162.d \
 GameInfo.d \
+highscorefix.d \
 Joystick_driver.d \
 menuselections.d \
 oled_driver.d \
@@ -111,6 +115,7 @@ CAN.d \
 CAN_controller_driver.d \
 DriverATmega162.d \
 GameInfo.d \
+highscorefix.d \
 Joystick_driver.d \
 menuselections.d \
 oled_driver.d \
@@ -133,6 +138,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

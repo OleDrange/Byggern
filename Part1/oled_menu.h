@@ -39,4 +39,4 @@ void oled_menu_print(menu*);
 void singleplayer(int);
 void showHighscore();
 
-#endif OLED_MENU
+#endif 

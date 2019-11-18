@@ -155,6 +155,12 @@
     <Compile Include="GameInfo.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="highscorefix.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="highscorefix.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Joystick_driver.c">
       <SubType>compile</SubType>
     </Compile>

@@ -14,6 +14,8 @@ DriverATmega162.c
 
 GameInfo.c
 
+highscorefix.c
+
 Joystick_driver.c
 
 menuselections.c

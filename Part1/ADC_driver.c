@@ -63,7 +63,7 @@ void ADC_start_read(ADC_channel channel){
 		data = 0x07;
 		break;
 		default:
-		printf("Not valid channel");
+		break;
 	}
 	
 	ext_adc[0] = data;

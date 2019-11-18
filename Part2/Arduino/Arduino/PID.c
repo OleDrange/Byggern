@@ -26,6 +26,7 @@ double eprev = 0;
 double deriv = 0;
 int16_t speed;
 int count = 0;
+int16_t topspeed = 80;
 ISR(TIMER2_OVF_vect){
 	pos = motor_encoder(0);
 	e = pos - posd;
@@ -47,11 +48,11 @@ ISR(TIMER2_OVF_vect){
 		speed = -500;
 	}
 	if (abs(e) > 1800){
-		speed = (int16_t)mapspeed(speed,0,500,40,100);
+		speed = (int16_t)mapspeed(speed,0,500,40,topspeed+20);
 	}
 	else
 	{
-		speed = (int16_t)mapspeed(speed,0,500,38,80);
+		speed = (int16_t)mapspeed(speed,0,500,38,topspeed);
 	}
 	speed = abs(speed);
 	speedout = speed;
@@ -79,6 +80,30 @@ void PID_stop(){
 void PID_setpos(int16_t SETPUNKT){
 	posd = SETPUNKT;
 }
+
+void PID_SET_EASY(){
+	//Kp = 0.08;
+	//Ki = 0.2;
+	//Kd = 0.0009;
+	//printf("TEST EASY");
+	topspeed = 120;
+}
+void PID_SET_MEDIUM(){
+	//Kp = 0.1;
+	//Ki = 0.25;
+	//Kd = 0.0009;
+	//printf("TEST MEDIUM");
+	topspeed = 80;
+}
+void PID_SET_HARD(){
+	//Kp = 0.15;
+	//Ki = 0.5;
+	//Kd = 0.00009;
+	//printf("TEST HARD");
+	topspeed = 170;
+}
+
+
 long mapspeed(int16_t x, int16_t in_min, int16_t in_max, int16_t out_min, int16_t out_max)
 {
 	return (long)(x - in_min) * (long)(out_max - out_min) / (long)(in_max - in_min) + out_min;

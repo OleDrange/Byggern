@@ -19,4 +19,4 @@ typedef struct {
 void sendInfo(menu_option);
 gamevars getInfo();
 
-#endif GAMEINFO_H
+#endif

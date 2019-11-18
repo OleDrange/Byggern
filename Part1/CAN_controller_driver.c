@@ -12,12 +12,10 @@
 #include <avr/delay.h>
 
 void activate_slave(){
-	/* Activate Slave Select */
 	clear_bit(PORTB, PB4);
 }
 
 void deactivate_slave(){
-	/* Deactivate Slave Select */
 	set_bit(PORTB, PB4);
 }
 
@@ -33,27 +31,19 @@ uint8_t mcp_2515_init(uint8_t mode){
 	mcp_2515_reset();
 	
 	val = mcp_2515_read(MCP_CANSTAT);
-	//printf("val : %d ",val);
 	uint8_t mode_bits = (val & MODE_MASK);
 	if(mode_bits != MODE_CONFIG){
-		printf("MCP2515 is NOT in Configuration mode after reset! Its config bits are %x\n", mode_bits);
 		return 1;
 	}
 	
 	mcp_2515_set_mode(mode);
 	
 	val = mcp_2515_read(MCP_CANSTAT);
-	//printf("val : %d  and  MCP %d   AND MASK %d",val, MCP_CANSTAT, MODE_MASK);
 	mode_bits = (val & MODE_MASK);
 	
 	if(mode_bits != mode){
-		
-		printf("MCP2515 is NOT in correct mode after reset! Its config bits are %x\n", mode_bits);
-		printf("\n!\n");
 		return 1;
 	}
-	
-	
 	return 0;
 }
 
@@ -61,7 +51,7 @@ void mcp_2515_reset(){
 	activate_slave();
 	SPI_write(MCP_RESET);
 	deactivate_slave();
-	_delay_ms(10);	//a small delay after mcp reset
+	_delay_ms(10);
 }
 
 uint8_t mcp_2515_read(uint8_t address){

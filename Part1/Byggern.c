@@ -18,9 +18,10 @@
 #include "CAN.h"
 #include "GameInfo.h"
 #include "menuselections.h"
+#include "highscorefix.h"
 
 int nextIndex = 0;
-int joystickarray[10];
+int joystickarray[6];
 long map(long x, long in_min, long in_max, long out_min, long out_max);
 JoystickDir joyupdatejoystickavrage(JoystickDir input);
 int main( )
@@ -30,7 +31,7 @@ int main( )
 	ADC_init();
 	Joystick_calibrate();
 	oled_init();
-	menu* mymenu = oled_menu_init();
+	oled_menu_init();
 	Joystick myjoystick;
 	gamevars mygame;
 	gamevars mygameold;
@@ -41,11 +42,10 @@ int main( )
 	printf("NEW START!!!!");
 	int sendinfoflag =0;
 	int gamemode = 0;
-
 	JoystickDir myjoystickhold = NEUTRAL;
+	initHighscore();
 	while(1)
 	{
-		//printf("TESTINGS\r\n");
 		mygame = getInfo();
 		if(mygame.enemypoints != mygameold.enemypoints || mygame.mypoints != mygameold.mypoints){
 			updatescore = 1;
@@ -55,14 +55,17 @@ int main( )
 		}
 		mygameold = mygame;
 		myjoystick = joystickPos();
+		
 		if(myjoystick.Dir != myjoystickhold){
 			if(joyupdatejoystickavrage(myjoystick.Dir) == LEFT){
 				sendReset();
 				lastOption = NONE;
-				printf("SVART!!!!");
 			}
 			if(lastOption == SinglePlayer || lastOption == Multiplayer){
 				gamemode = 1;
+			}
+			else if(lastOption == Highscore || lastOption == Medium || lastOption == Hard || lastOption == Easy){
+				//lastOption = printgame(lastOption,mygame);
 			}
 			else{
 				lastOption = printgame(oled_menu_select(),mygame);
@@ -74,15 +77,14 @@ int main( )
 		if(gamemode){
 			if(updatescore){
 				lastOption = printgame(lastOption,mygame);
-				printf("UPDATE SCORE\r\n");
 			}
 			sendinfoflag++;
-			if(sendinfoflag > 20){
+			if(sendinfoflag > 50){
 				sendInfo(lastOption);
 				sendinfoflag = 0;
 			}
 		}
-		_delay_ms(10);
+		//_delay_ms(10);
 	}
 	
 	return 1;
@@ -94,11 +96,11 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
 JoystickDir joyupdatejoystickavrage(JoystickDir input){
 	joystickarray[nextIndex] = input;
 	nextIndex ++;
-	if(nextIndex > 9){
+	if(nextIndex > 5){
 		nextIndex = 0;
 	}
 	int count = 0;
-	for(int i = 0; i < 9; i++){
+	for(int i = 0; i < 5; i++){
 		if(joystickarray[i] == 0){
 			count++;
 		}

@@ -18,7 +18,6 @@ volatile int flag = 0;
 
 ISR(INT0_vect){
 	flag = 1;
-	//printf("\r\n INTERUPT\r\n");
 }
 
 void can_init(uint8_t mode){
@@ -57,7 +56,6 @@ can_message can_handle_messages(){
 	can_message message1;
 	if (v[0]){
 		can_message_receive(0, &message1);
-		//mcp_2515_write(MCP_CANINTF,0);
 		mcp_2515_bit_modify(MCP_CANINTF, 1, 0);
 		mcp_2515_bit_modify(MCP_CANINTF, 1, 0);
 		can_int_vect(v);
@@ -71,7 +69,6 @@ can_message can_handle_messages(){
 	
 	if (v[1]){
 		can_message_receive(1, &message2);
-		//mcp_2515_write(MCP_CANINTF,0);
 		mcp_2515_bit_modify(MCP_CANINTF, 2, 0);
 		mcp_2515_bit_modify(MCP_CANINTF, 2, 0);
 		can_int_vect(v);
@@ -95,7 +92,6 @@ void can_message_send(can_message* message){
 		}
 	}
 	
-	// Arbitration field identifier ID = 1337;    id high = 167  id low = 0
 	unsigned int ID = message->id;
 	char id_high = ID / 8;
 	char id_low = ID % 8;
@@ -115,7 +111,6 @@ void can_message_send(can_message* message){
 	
 	// Request to send message, send if successful
 	mcp_2515_request_to_send(MCP_RTS_TX0 + buffer_number);
-	//printf("buffer nr. %d\n\r",buffer_number);
 	
 }
 
@@ -143,7 +138,6 @@ void can_message_receive(int rec_buff_num, can_message* received_message){
 	for (uint8_t byte = 0; byte < data_length; byte++) {
 		received_message->data[byte] = mcp_2515_read(MCP_RXB0DM + byte + 16 * rec_buff_num);
 	}
-	
 }
 
 void can_int_vect(int* v) { 
